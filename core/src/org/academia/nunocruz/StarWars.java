@@ -25,6 +25,9 @@ public class StarWars extends Game {
 	public static final short ENEMY_BIT = 64;
 	public static final short FIREBALL_BIT = 128;
 
+	/** Ana */
+	public static final short LIGHTSABER_BIT = 256;
+
 
 	public SpriteBatch batch;
 

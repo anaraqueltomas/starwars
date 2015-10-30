@@ -15,12 +15,15 @@ public class Tusken extends Enemy {
     private float stateTime;
     private Animation walkAnimation;
     private Array<TextureRegion> frames;
-    private boolean setToDestroy;
-    private boolean destroyed;
 
+
+    /** Ana: Defining the hit method */
 
     public Tusken(PlayScreen screen, float x, float y) {
         super(screen, x, y);
+
+        health = 10;
+        damage = 2;
 
         frames = new Array<TextureRegion>();
 
@@ -49,6 +52,7 @@ public class Tusken extends Enemy {
             setRegion(walkAnimation.getKeyFrame(stateTime, true));
         }
     }
+
 
     @Override
     protected void defineEnemy() {

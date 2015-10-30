@@ -1,5 +1,7 @@
 package org.academia.nunocruz.gameObjects.Enemies;
 
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -19,12 +21,17 @@ public class Jawa extends Enemy{
     private float stateTime;
     private Animation walkAnimation;
     private Array<TextureRegion> frames;
-    private boolean setToDestroy;
-    private boolean destroyed;
+
+
+
+    /** Ana: defining the hit method */
 
 
     public Jawa(PlayScreen screen, float x, float y) {
         super(screen, x, y);
+
+        health = 6;
+        damage = 1;
 
         frames = new Array<TextureRegion>();
 
@@ -54,6 +61,7 @@ public class Jawa extends Enemy{
         }
     }
 
+
     @Override
     protected void defineEnemy() {
 
@@ -79,5 +87,7 @@ public class Jawa extends Enemy{
         if(!destroyed || stateTime < 1)
             super.draw(batch);
     }
+
+
 
 }

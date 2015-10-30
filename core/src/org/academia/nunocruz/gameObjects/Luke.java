@@ -26,6 +26,7 @@ public class Luke extends Sprite {
     private boolean runningRight;
     private boolean lukeIsDead;
 
+
     public Luke(PlayScreen screen){
 
         super(screen.getAtlas().findRegion("lukeStand"));
@@ -159,11 +160,11 @@ public class Luke extends Sprite {
         b2body.createFixture(fixtureDef).setUserData(this);
     }
 
-    public void hit(){
+    public void hit(int n){
 
         StarWars.manager.get("audio/music/gameMusic.wav", Music.class).stop();
         StarWars.manager.get("audio/sounds/gameover.wav", Sound.class).play();
-        lukeIsDead = true;
+
 
     }
 
