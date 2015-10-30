@@ -164,7 +164,6 @@ public class Luke extends Sprite {
         StarWars.manager.get("audio/music/gameMusic.wav", Music.class).stop();
         StarWars.manager.get("audio/sounds/gameover.wav", Sound.class).play();
         lukeIsDead = true;
-
     }
 
     public boolean isDead(){

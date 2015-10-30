@@ -19,7 +19,7 @@ public class Hud implements Disposable {
     private Viewport viewport;
 
     //Luke score/time Tracking Variables
-    private Integer worldTimer;
+    private static Integer worldTimer;
     private float timeCount;
     private static Integer score;
     private static Integer energyPoints;
@@ -103,6 +103,10 @@ public class Hud implements Disposable {
 
     public static Integer getEnergyPoints() {
         return energyPoints;
+    }
+
+    public static Integer getWorldTimer() {
+        return worldTimer;
     }
 
     @Override
