@@ -44,7 +44,7 @@ public class PlayScreen implements Screen{
     private B2dWorld creator;
 
     //Sprites
-    private Luke luke;
+    private Luke player;
 
     //Music
     private Music music;
@@ -66,7 +66,7 @@ public class PlayScreen implements Screen{
 
         //Load our map and setup our map renderer
         maploader = new TmxMapLoader();
-        map = maploader.load("teste.tmx");
+        map = maploader.load("Mapa/starwars.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1  / StarWars.PPM);
 
         //initially set our gamecam to be centered correctly at the start of of map
@@ -81,7 +81,7 @@ public class PlayScreen implements Screen{
         creator = new B2dWorld(this);
 
         //create luke in our game world
-        luke = new Luke(this);
+        player = new Luke(this);
 
         world.setContactListener(new B2dContactListener());
 
@@ -103,22 +103,14 @@ public class PlayScreen implements Screen{
 
     public void handleInput(float dt){
 
-        //control our luke using immediate impulses
-         if(luke.currentState != Luke.State.DEAD) {
-
+        //control our player using immediate impulses
+         if(player.currentState != Luke.State.DEAD) {
              if (Gdx.input.isKeyJustPressed(Input.Keys.UP))
-
-                 /** Ana: FLAG to stop multiple jumps */
-                 if (luke.currentState != Luke.State.JUMPING) {
-                     luke.jump();
-                     luke.setCurrentState(Luke.State.JUMPING);
-                 }
-
-             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && luke.b2body.getLinearVelocity().x <= 2)
-                 luke.b2body.applyLinearImpulse(new Vector2(0.1f, 0), luke.b2body.getWorldCenter(), true);
-
-             if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && luke.b2body.getLinearVelocity().x >= -2)
-                 luke.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), luke.b2body.getWorldCenter(), true);
+                 player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
+             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
+                 player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
+             if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2)
+                 player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
 
          }
     }
@@ -130,12 +122,12 @@ public class PlayScreen implements Screen{
         //takes 1 step in the physics simulation(60 times per second)
         world.step(1 / 60f, 6, 2);
 
-        luke.update(dt);
+        player.update(dt);
 
         // Os inimigos só "acordam" quando estamos a menos de 224 metros deles;
         for(Enemy enemy : creator.getEnemies()) {
             enemy.update(dt);
-            if(enemy.getX() < luke.getX() + 224 / StarWars.PPM) {
+            if(enemy.getX() < player.getX() + 224 / StarWars.PPM) {
                 enemy.b2body.setActive(true);
             }
         }
@@ -143,8 +135,8 @@ public class PlayScreen implements Screen{
         hud.update(dt);
 
         //attach our gamecam to our players.x coordinate
-        if(luke.currentState != Luke.State.DEAD) {
-            gamecam.position.x = luke.b2body.getPosition().x;
+        if(player.currentState != Luke.State.DEAD) {
+            gamecam.position.x = player.b2body.getPosition().x;
         }
 
         //update our gamecam with correct coordinates after changes
@@ -173,8 +165,8 @@ public class PlayScreen implements Screen{
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
 
-        //desenha o luke
-        luke.draw(game.batch);
+        //desenha o player
+        player.draw(game.batch);
 
         //desenha os inimigos
         for (Enemy enemy : creator.getEnemies())
@@ -194,11 +186,7 @@ public class PlayScreen implements Screen{
 
     public boolean gameOver(){
 
-        //luke.isDead()
-
-        if(luke.currentState == Luke.State.DEAD && luke.getStateTimer() > 1
-           || Luke.getEnergyPoints() <= 0  && luke.getStateTimer() > 1
-           || Hud.getWorldTimer() <= 0 && luke.getStateTimer() > 1){
+        if(player.currentState == Luke.State.DEAD && player.getStateTimer() > 1){
             return true;
         }
         return false;

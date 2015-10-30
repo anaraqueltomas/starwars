@@ -5,11 +5,9 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import org.academia.nunocruz.StarWars;
-import org.academia.nunocruz.screens.Hud;
 import org.academia.nunocruz.screens.PlayScreen;
 
 public class Luke extends Sprite {
@@ -26,7 +24,6 @@ public class Luke extends Sprite {
     private float stateTimer;
     private boolean runningRight;
     private boolean lukeIsDead;
-    private static Integer energyPoints = 20;
 
 
     public Luke(PlayScreen screen){
@@ -38,30 +35,30 @@ public class Luke extends Sprite {
         stateTimer = 0;
         runningRight = true;
 
-        Array<TextureRegion> frames = new Array<TextureRegion>();
+        Array<TextureRegion> lukeStand = new Array<TextureRegion>();
 
         //get run animation frames and add them to lukeRun Animation
-        for(int i = 0; i < 3; i++){
-            frames.add(new TextureRegion(getTexture(), i*32, 0, 32, 32));
+        for(int i=9; i<12; i++){
+            lukeStand.add(new TextureRegion(getTexture(), (i * 32)+4, 70, 32, 32));
         }
-        lukeRun = new Animation(0.1f, frames);
-        frames.clear();
+        lukeRun = new Animation(0.1f, lukeStand);
+        lukeStand.clear();
 
         //get jump animation frames and add them to lukeJump Animation
-        for(int i = 0; i < 4; i++) {
-            frames.add(new TextureRegion(getTexture(), i*32, 0, 32, 32));
+        for(int i = 9; i < 12; i++){
+            lukeStand.add(new TextureRegion(getTexture(), (i * 32)+4, 70, 32, 32));
         }
-        lukeJump = new Animation(0.1f, frames);
+        lukeJump = new Animation(0.1f, lukeStand);
 
         //create texture region for luke standing
-        lukeStand = new TextureRegion(getTexture(),256,64,32,32);
+        this.lukeStand = new TextureRegion(getTexture(),324,70,32,32);
 
         //define mario in Box2d
         defineLuke();
 
         //set initial values for luke location, width and height. And initial frame as lukeStand.
         setBounds(0,0,32/ StarWars.PPM,32 / StarWars.PPM);
-        setRegion(lukeStand);
+        setRegion(this.lukeStand);
 
     }
 
@@ -124,7 +121,7 @@ public class Luke extends Sprite {
     public State getState(){
         //Test to Box2D for velocity on the X and Y-Axis
         //if luke is going positive in Y-Axis he is jumping... or if he just jumped and is falling remain in jump state
-        if((b2body.getLinearVelocity().y > 0 && currentState == State.JUMPING) || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING)) {
+        if(b2body.getLinearVelocity().y > 0 || b2body.getLinearVelocity().y<0 && previousState == State.JUMPING ) {
             return State.JUMPING;
         }
         else if(lukeIsDead){
@@ -165,9 +162,9 @@ public class Luke extends Sprite {
     public void hit(int n){
 
         StarWars.manager.get("audio/music/gameMusic.wav", Music.class).stop();
-        //StarWars.manager.get("audio/sounds/gameover.wav", Sound.class).play();
-        //lukeIsDead = true;
-        subtractEnergyPoints(2);
+        StarWars.manager.get("audio/sounds/gameover.wav", Sound.class).play();
+        lukeIsDead = true;
+
     }
 
     public boolean isDead(){
@@ -178,26 +175,4 @@ public class Luke extends Sprite {
         return stateTimer;
     }
 
-    public void setCurrentState(State currentState) {
-        this.currentState = currentState;
-    }
-
-    public void jump() {
-        b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
-        currentState = State.JUMPING;
-    }
-
-    public static Integer getEnergyPoints() {
-        return energyPoints;
-    }
-
-    public static void addEnergyPoints(int value){
-        energyPoints += value;
-        Hud.setEnergyLabel();
-    }
-
-    public static void subtractEnergyPoints(int value){
-        energyPoints -= value;
-        Hud.setEnergyLabel();
-    }
 }

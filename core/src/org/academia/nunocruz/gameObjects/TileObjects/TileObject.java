@@ -49,6 +49,8 @@ public abstract class TileObject {
         fixture.setFilterData(filter);
     }
 
+    public abstract void onHit();
+
     public TiledMapTileLayer.Cell getCell(){
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(1);
         return layer.getCell((int)(body.getPosition().x * StarWars.PPM / 16),
