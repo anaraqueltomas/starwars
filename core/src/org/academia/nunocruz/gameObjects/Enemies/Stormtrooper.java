@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import org.academia.nunocruz.StarWars;
 import org.academia.nunocruz.screens.PlayScreen;
@@ -24,12 +24,12 @@ public class Stormtrooper extends Enemy {
 
         frames = new Array<TextureRegion>();
 
-        for(int i = 0; i < 2; i++) {
-            frames.add(new TextureRegion(screen.getAtlas().findRegion("goomba"), i * 16, 0, 16, 16));
+        for(int i = 21; i < 24; i++) {
+            frames.add(new TextureRegion(screen.getAtlas().findRegion("tusken-rideres"), i * 32, 0, 32, 32));
         }
 
         walkAnimation = new Animation(0.4f, frames);
-        setBounds(getX(), getY(), 16 / StarWars.PPM, 16 / StarWars.PPM);
+        setBounds(getX(), getY(), 32 / StarWars.PPM, 32 / StarWars.PPM);
         setToDestroy = false;
         destroyed = false;
     }
@@ -40,7 +40,7 @@ public class Stormtrooper extends Enemy {
         if(setToDestroy && !destroyed){
             world.destroyBody(b2body);
             destroyed = true;
-            setRegion(new TextureRegion(screen.getAtlas().findRegion("goomba"), 32, 0, 16, 16));
+            setRegion(new TextureRegion(screen.getAtlas().findRegion("tusken-rideres"), 32, 0, 32, 32));
             stateTime = 0;
         }
         else if(!destroyed) {
@@ -59,8 +59,9 @@ public class Stormtrooper extends Enemy {
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
-        CircleShape shape = new CircleShape();
-        shape.setRadius(6 / StarWars.PPM);
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(8 / StarWars.PPM, 16/StarWars.PPM);
+
         fdef.filter.categoryBits = StarWars.ENEMY_BIT;
         fdef.filter.maskBits = StarWars.GROUND_BIT | StarWars.ENERGYGLOBE_BIT | StarWars.BRICK_BIT |
                 StarWars.ENEMY_BIT | StarWars.OBJECT_BIT | StarWars.LUKE_BIT;

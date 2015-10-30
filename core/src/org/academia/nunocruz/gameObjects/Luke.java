@@ -27,7 +27,7 @@ public class Luke extends Sprite {
 
     public Luke(PlayScreen screen){
 
-        super(screen.getAtlas().findRegion("little_mario"));
+        super(screen.getAtlas().findRegion("lukeStand"));
         this.world = screen.getWorld();
         currentState = State.STANDING;
         previousState = State.STANDING;
@@ -37,26 +37,26 @@ public class Luke extends Sprite {
         Array<TextureRegion> frames = new Array<TextureRegion>();
 
         //get run animation frames and add them to lukeRun Animation
-        for(int i=1; i<4; i++){
-            frames.add(new TextureRegion(getTexture(), i*16, 0, 16, 16));
+        for(int i=0; i<3; i++){
+            frames.add(new TextureRegion(getTexture(), i*32, 0, 32, 32));
         }
         lukeRun = new Animation(0.1f, frames);
         frames.clear();
 
         //get jump animation frames and add them to lukeJump Animation
-        for(int i = 4; i < 6; i++){
-            frames.add(new TextureRegion(getTexture(), i*16, 0, 16, 16));
+        for(int i = 0; i < 4; i++){
+            frames.add(new TextureRegion(getTexture(), i*32, 0, 32, 32));
         }
         lukeJump = new Animation(0.1f, frames);
 
         //create texture region for luke standing
-        lukeStand = new TextureRegion(getTexture(),0,0,16,16);
+        lukeStand = new TextureRegion(getTexture(),256,64,32,32);
 
         //define mario in Box2d
         defineLuke();
 
         //set initial values for luke location, width and height. And initial frame as lukeStand.
-        setBounds(0,0,16/ StarWars.PPM,16 / StarWars.PPM);
+        setBounds(0,0,32/ StarWars.PPM,32 / StarWars.PPM);
         setRegion(lukeStand);
 
     }
@@ -84,11 +84,9 @@ public class Luke extends Sprite {
             case JUMPING:
                 region = lukeJump.getKeyFrame(stateTimer);
                 break;
-
             case RUNNING:
                 region = lukeRun.getKeyFrame(stateTimer, true);
                 break;
-
             case STANDING:
             case FALLING:
             default:
@@ -145,13 +143,13 @@ public class Luke extends Sprite {
     public void defineLuke(){
 
         BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set(32/ StarWars.PPM,32/ StarWars.PPM);
+        bodyDef.position.set(64/ StarWars.PPM,64/ StarWars.PPM);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bodyDef);
 
         FixtureDef fixtureDef = new FixtureDef();
-        CircleShape shape = new CircleShape();
-        shape.setRadius(6/ StarWars.PPM);
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(8/StarWars.PPM,16/StarWars.PPM);
         fixtureDef.filter.categoryBits = StarWars.LUKE_BIT;
         fixtureDef.filter.maskBits = StarWars.GROUND_BIT | StarWars.ENERGYGLOBE_BIT | StarWars.BRICK_BIT|
                 StarWars.ENEMY_BIT| StarWars.OBJECT_BIT;

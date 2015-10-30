@@ -21,6 +21,7 @@ public class GameOverScreen implements Screen{
     private Game game;
 
     public GameOverScreen(Game game){
+
         this.game = game;
         viewport = new FitViewport(StarWars.V_WIDTH, StarWars.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((StarWars) game).batch);

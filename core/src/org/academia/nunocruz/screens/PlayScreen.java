@@ -51,7 +51,7 @@ public class PlayScreen implements Screen{
 
     public PlayScreen(StarWars game){
 
-        atlas = new TextureAtlas("Mario_and_Enemies.pack");
+        atlas = new TextureAtlas("pack.atlas");
 
         this.game = game;
 
@@ -148,7 +148,7 @@ public class PlayScreen implements Screen{
 
     @Override
     public void render(float delta) {
-        
+
         //separate our update logic from render
         update(delta);
 
@@ -165,7 +165,10 @@ public class PlayScreen implements Screen{
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
 
+        //desenha o player
         player.draw(game.batch);
+
+        //desenha os inimigos
         for (Enemy enemy : creator.getEnemies())
             enemy.draw(game.batch);
 

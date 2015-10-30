@@ -1,0 +1,83 @@
+
+pack.png
+size: 512,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+c3p0
+  rotate: false
+  xy: 196, 70
+  size: 96, 32
+  orig: 96, 32
+  offset: 0, 0
+  index: -1
+energy
+  rotate: false
+  xy: 2, 36
+  size: 160, 32
+  orig: 160, 32
+  offset: 0, 0
+  index: -1
+jawa
+  rotate: false
+  xy: 262, 36
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+leia
+  rotate: false
+  xy: 2, 2
+  size: 96, 32
+  orig: 96, 32
+  offset: 0, 0
+  index: -1
+luke-dead
+  rotate: false
+  xy: 392, 70
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+luke-hand-walking
+  rotate: false
+  xy: 198, 2
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+lukeGun
+  rotate: false
+  xy: 164, 36
+  size: 96, 32
+  orig: 96, 32
+  offset: 0, 0
+  index: -1
+lukeLightSaber
+  rotate: false
+  xy: 2, 70
+  size: 192, 32
+  orig: 192, 32
+  offset: 0, 0
+  index: -1
+lukeStand
+  rotate: false
+  xy: 294, 70
+  size: 96, 32
+  orig: 96, 32
+  offset: 0, 0
+  index: -1
+r2d2
+  rotate: false
+  xy: 328, 36
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+tusken-rideres
+  rotate: false
+  xy: 100, 2
+  size: 96, 32
+  orig: 96, 32
+  offset: 0, 0
+  index: -1
