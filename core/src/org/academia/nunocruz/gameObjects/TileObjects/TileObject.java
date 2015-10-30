@@ -7,7 +7,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import org.academia.nunocruz.StarWars;
-import org.academia.nunocruz.gameObjects.Luke;
 import org.academia.nunocruz.screens.PlayScreen;
 
 public abstract class TileObject {
@@ -22,6 +21,7 @@ public abstract class TileObject {
     protected Fixture fixture;
 
     public TileObject(PlayScreen screen, MapObject object){
+
         this.object = object;
         this.screen = screen;
         this.world = screen.getWorld();
@@ -43,7 +43,6 @@ public abstract class TileObject {
 
     }
 
-    public abstract void onHeadHit(Luke luke);
     public void setCategoryFilter(short filterBit){
         Filter filter = new Filter();
         filter.categoryBits = filterBit;

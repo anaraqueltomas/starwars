@@ -1,17 +1,15 @@
 package org.academia.nunocruz.gameObjects;
 
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import org.academia.nunocruz.StarWars;
 import org.academia.nunocruz.screens.PlayScreen;
 
-/**
- * Created by nunocruz on 29/10/15.
- */
 public class Luke extends Sprite {
 
     public enum State{ FALLING, JUMPING, STANDING, RUNNING, DEAD}
@@ -20,9 +18,9 @@ public class Luke extends Sprite {
 
     public World world;
     public Body b2body;
-    private TextureRegion marioStand;
-    private Animation marioRun;
-    private Animation marioJump;
+    private TextureRegion lukeStand;
+    private Animation lukeRun;
+    private Animation lukeJump;
     private float stateTimer;
     private boolean runningRight;
     private boolean lukeIsDead;
@@ -38,28 +36,28 @@ public class Luke extends Sprite {
 
         Array<TextureRegion> frames = new Array<TextureRegion>();
 
-        //get run animation frames and add them to marioRun Animation
+        //get run animation frames and add them to lukeRun Animation
         for(int i=1; i<4; i++){
             frames.add(new TextureRegion(getTexture(), i*16, 0, 16, 16));
         }
-        marioRun = new Animation(0.1f, frames);
+        lukeRun = new Animation(0.1f, frames);
         frames.clear();
 
-        //get jump animation frames and add them to marioJump Animation
+        //get jump animation frames and add them to lukeJump Animation
         for(int i = 4; i < 6; i++){
             frames.add(new TextureRegion(getTexture(), i*16, 0, 16, 16));
         }
-        marioJump = new Animation(0.1f, frames);
+        lukeJump = new Animation(0.1f, frames);
 
-        //create texture region for mario standing
-        marioStand = new TextureRegion(getTexture(),0,0,16,16);
+        //create texture region for luke standing
+        lukeStand = new TextureRegion(getTexture(),0,0,16,16);
 
         //define mario in Box2d
-        defineMario();
+        defineLuke();
 
-        //set initial values for marios location, width and height. And initial frame as marioStand.
+        //set initial values for luke location, width and height. And initial frame as lukeStand.
         setBounds(0,0,16/ StarWars.PPM,16 / StarWars.PPM);
-        setRegion(marioStand);
+        setRegion(lukeStand);
 
     }
 
@@ -70,11 +68,12 @@ public class Luke extends Sprite {
 
         //update sprite with the correct frame
         setRegion(getFrame(delta));
+
     }
 
     public TextureRegion getFrame(float delta){
 
-        //get marios current state. ie. jumping, running, standing...
+        //get luke current state. ie. jumping, running, standing...
         currentState = getState();
 
         TextureRegion region;
@@ -83,30 +82,30 @@ public class Luke extends Sprite {
         switch (currentState){
 
             case JUMPING:
-                region = marioJump.getKeyFrame(stateTimer);
+                region = lukeJump.getKeyFrame(stateTimer);
                 break;
+
             case RUNNING:
-                region = marioRun.getKeyFrame(stateTimer, true);
+                region = lukeRun.getKeyFrame(stateTimer, true);
                 break;
+
             case STANDING:
             case FALLING:
             default:
-                region = marioStand;
+                region = lukeStand;
                 break;
         }
 
-
-        //if mario is running left and the texture isnt facing left... flip it.
+        //if luke is running left and the texture isnt facing left... flip it.
         if((b2body.getLinearVelocity().x<0 || !runningRight) && !region.isFlipX()){
             region.flip(true,false);
             runningRight = false;
         }
 
-        //if mario is running right and the texture isnt facing right... flip it.
+        //if luke is running right and the texture isnt facing right... flip it.
         else if((b2body.getLinearVelocity().x>0 || runningRight)&& region.isFlipX()){
             region.flip(true,false);
             runningRight = true;
-
         }
 
         //if the current state is the same as the previous state increase the state timer.
@@ -122,7 +121,7 @@ public class Luke extends Sprite {
 
     public State getState(){
         //Test to Box2D for velocity on the X and Y-Axis
-        //if mario is going positive in Y-Axis he is jumping... or if he just jumped and is falling remain in jump state
+        //if luke is going positive in Y-Axis he is jumping... or if he just jumped and is falling remain in jump state
         if(b2body.getLinearVelocity().y > 0 || b2body.getLinearVelocity().y<0 && previousState == State.JUMPING ) {
             return State.JUMPING;
         }
@@ -133,7 +132,7 @@ public class Luke extends Sprite {
         else if(b2body.getLinearVelocity().y < 0) {
             return State.FALLING;
         }
-            //if mario is positive or negative in the X axis he is running
+            //if luke is positive or negative in the X axis he is running
         else if(b2body.getLinearVelocity().x != 0) {
             return State.RUNNING;
         }
@@ -141,10 +140,9 @@ public class Luke extends Sprite {
         else{
             return State.STANDING;
         }
-
     }
 
-    public void defineMario(){
+    public void defineLuke(){
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(32/ StarWars.PPM,32/ StarWars.PPM);
@@ -154,28 +152,19 @@ public class Luke extends Sprite {
         FixtureDef fixtureDef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(6/ StarWars.PPM);
-        fixtureDef.filter.categoryBits = StarWars.MARIO_BIT;
-        fixtureDef.filter.maskBits = StarWars.GROUND_BIT | StarWars.COIN_BIT | StarWars.BRICK_BIT|
-                StarWars.ENEMY_BIT| StarWars.OBJECT_BIT| StarWars.ENEMY_HEAD_BIT;
+        fixtureDef.filter.categoryBits = StarWars.LUKE_BIT;
+        fixtureDef.filter.maskBits = StarWars.GROUND_BIT | StarWars.ENERGYGLOBE_BIT | StarWars.BRICK_BIT|
+                StarWars.ENEMY_BIT| StarWars.OBJECT_BIT;
 
         fixtureDef.shape = shape;
-        b2body.createFixture(fixtureDef);
-
-        EdgeShape head = new EdgeShape();
-        head.set(new Vector2(-2/ StarWars.PPM, 6 / StarWars.PPM), new Vector2(2/StarWars.PPM, 6 /StarWars.PPM));
-        fixtureDef.shape = head;
-        fixtureDef.isSensor = true;
-
-        b2body.createFixture(fixtureDef).setUserData("head");
+        b2body.createFixture(fixtureDef).setUserData(this);
     }
 
     public void hit(){
 
-        /**
-        StarWars.manager.get("audio/music/mario_music.ogg", Music.class).stop();
-        StarWars.manager.get("audio/sounds/mariodie.wav", Sound.class).play();
+        StarWars.manager.get("audio/music/gameMusic.wav", Music.class).stop();
+        StarWars.manager.get("audio/sounds/gameover.wav", Sound.class).play();
         lukeIsDead = true;
-         */
 
     }
 

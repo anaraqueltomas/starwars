@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="20" tilewidth="16" tileheight="16" nextobjectid="25">
+ <tileset firstgid="1" name="tileExemplo" tilewidth="16" tileheight="16" tilecount="12288">
+  <image source="tileExemplo.png" trans="ff00ff" width="2048" height="1536"/>
+ </tileset>
+ <layer name="Background" width="240" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6B6mML6N1EXuyChl1RVVVVVVVVVVVVVVVVVVVVVVVWfDhHTf3k=
+  </data>
+ </layer>
+ <layer name="Gráficos" width="240" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt10Fqg1AUBVCXIG7BFeVDO2l2km7SQDNpdpIOKgFbsfh9PzaE1nPggQbe18nNTaoKAAAAAAAAgP/oqa2q5zZ/veZM4H7e+pyd2vz1mjMBgJ9e6vnZ1+vPKj0DiHuv5+c8yd6hv3/N5DFyBvAYlz6LH/IIf9JS/95i1yxPan73mbBF9+jfrlmeo/zCVaTrSrsw0qFzu0NG556d5Be+RLqutAuHnOX2ctlPk+ym0Y7fz/At2pXDdE2sQ4+jHOYm9z7j74ilPdiiyP/N0v4dPo9M5H0ie7BFn0EkkFE=
+  </data>
+ </layer>
+ <objectgroup name="Ground">
+  <object id="1" x="0" y="256" width="272" height="64"/>
+  <object id="2" x="336" y="256" width="176" height="64"/>
+  <object id="3" x="576" y="224" width="160" height="96"/>
+ </objectgroup>
+ <objectgroup name="Pipes">
+  <object id="4" x="240" y="192" width="32" height="64"/>
+ </objectgroup>
+ <objectgroup name="Brick">
+  <object id="5" x="64" y="176" width="32" height="32"/>
+  <object id="7" x="96" y="176" width="32" height="32"/>
+  <object id="8" x="128" y="176" width="32" height="32"/>
+  <object id="9" x="160" y="176" width="32" height="32"/>
+  <object id="11" x="368" y="176" width="32" height="32"/>
+  <object id="12" x="400" y="176" width="32" height="32"/>
+  <object id="13" x="432" y="176" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="Energy">
+  <object id="14" x="64" y="128" width="32" height="32"/>
+  <object id="16" x="112" y="128" width="32" height="32"/>
+  <object id="17" x="160" y="128" width="32" height="32"/>
+  <object id="18" x="400" y="128" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="Stormtrooper">
+  <object id="21" x="192" y="224" width="32" height="32"/>
+  <object id="23" x="400" y="224" width="32" height="32"/>
+  <object id="24" x="128" y="224" width="32" height="32"/>
+ </objectgroup>
+</map>

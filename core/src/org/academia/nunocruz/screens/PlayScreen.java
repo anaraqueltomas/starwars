@@ -43,16 +43,18 @@ public class PlayScreen implements Screen{
     private Box2DDebugRenderer b2dr;
     private B2dWorld creator;
 
-    //sprites
+    //Sprites
     private Luke player;
 
+    //Music
     private Music music;
 
-
     public PlayScreen(StarWars game){
+
         atlas = new TextureAtlas("Mario_and_Enemies.pack");
 
         this.game = game;
+
         //create cam used to follow Luke through cam world
         gamecam = new OrthographicCamera();
 
@@ -64,7 +66,7 @@ public class PlayScreen implements Screen{
 
         //Load our map and setup our map renderer
         maploader = new TmxMapLoader();
-        map = maploader.load("level1.tmx");
+        map = maploader.load("teste.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1  / StarWars.PPM);
 
         //initially set our gamecam to be centered correctly at the start of of map
@@ -72,24 +74,23 @@ public class PlayScreen implements Screen{
 
         //create our Box2D world, setting no gravity in X, -10 gravity in Y, and allow bodies to sleep
         world = new World(new Vector2(0, -10), true);
+
         //allows for debug lines of our box2d world.
         b2dr = new Box2DDebugRenderer();
 
         creator = new B2dWorld(this);
 
-        //create mario in our game world
+        //create luke in our game world
         player = new Luke(this);
 
         world.setContactListener(new B2dContactListener());
 
-        music = StarWars.manager.get("audio/music/mario_music.ogg", Music.class);
+        music = StarWars.manager.get("audio/music/gameMusic.wav", Music.class);
         music.setLooping(true);
         music.setVolume(0.3f);
-        //music.play();
+        music.play();
 
     }
-
-
 
     public TextureAtlas getAtlas(){
         return atlas;
@@ -101,6 +102,7 @@ public class PlayScreen implements Screen{
     }
 
     public void handleInput(float dt){
+
         //control our player using immediate impulses
          if(player.currentState != Luke.State.DEAD) {
              if (Gdx.input.isKeyJustPressed(Input.Keys.UP))
@@ -117,12 +119,12 @@ public class PlayScreen implements Screen{
         //handle user input first
         handleInput(dt);
 
-
         //takes 1 step in the physics simulation(60 times per second)
         world.step(1 / 60f, 6, 2);
 
         player.update(dt);
 
+        // Os inimigos só "acordam" quando estamos a menos de 224 metros deles;
         for(Enemy enemy : creator.getEnemies()) {
             enemy.update(dt);
             if(enemy.getX() < player.getX() + 224 / StarWars.PPM) {
@@ -137,7 +139,6 @@ public class PlayScreen implements Screen{
             gamecam.position.x = player.b2body.getPosition().x;
         }
 
-
         //update our gamecam with correct coordinates after changes
         gamecam.update();
         //tell our renderer to draw only what our camera can see in our game world.
@@ -145,9 +146,9 @@ public class PlayScreen implements Screen{
 
     }
 
-
     @Override
     public void render(float delta) {
+        
         //separate our update logic from render
         update(delta);
 
@@ -178,28 +179,26 @@ public class PlayScreen implements Screen{
             game.setScreen(new GameOverScreen(game));
             dispose();
         }
-
     }
 
     public boolean gameOver(){
 
-        if(player.currentState == Luke.State.DEAD && player.getStateTimer() > 3){
+        if(player.currentState == Luke.State.DEAD && player.getStateTimer() > 1){
             return true;
         }
         return false;
-
     }
 
     @Override
     public void resize(int width, int height) {
         //updated our game viewport
         gamePort.update(width,height);
-
     }
 
     public TiledMap getMap(){
         return map;
     }
+
     public World getWorld(){
         return world;
     }
@@ -228,6 +227,4 @@ public class PlayScreen implements Screen{
         b2dr.dispose();
         hud.dispose();
     }
-
-
 }

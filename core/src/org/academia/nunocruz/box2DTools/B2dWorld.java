@@ -12,7 +12,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import org.academia.nunocruz.StarWars;
 import org.academia.nunocruz.gameObjects.TileObjects.Brick;
-import org.academia.nunocruz.gameObjects.TileObjects.Coin;
+import org.academia.nunocruz.gameObjects.TileObjects.EnergyGlobe;
 import org.academia.nunocruz.gameObjects.Enemies.Enemy;
 import org.academia.nunocruz.gameObjects.Enemies.Stormtrooper;
 import org.academia.nunocruz.screens.PlayScreen;
@@ -22,9 +22,12 @@ public class B2dWorld {
     private Array<Stormtrooper> stormtroopers;
 
     public B2dWorld(PlayScreen screen){
+
         World world = screen.getWorld();
         TiledMap map = screen.getMap();
+
         //create body and fixture variables
+
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
         FixtureDef fdef = new FixtureDef();
@@ -44,7 +47,7 @@ public class B2dWorld {
             body.createFixture(fdef);
         }
 
-        //create pipe bodies/fixtures
+        //create brick bodies/fixtures
         for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
@@ -59,15 +62,15 @@ public class B2dWorld {
             body.createFixture(fdef);
         }
 
-        //create brick bodies/fixtures
+        //create energy bodies/fixtures
         for(MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
             new Brick(screen, object);
         }
 
-        //create coin bodies/fixtures
+        //create brick bodies/fixtures
         for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
 
-            new Coin(screen, object);
+            new EnergyGlobe(screen, object);
         }
 
         //create all stormtroopers;

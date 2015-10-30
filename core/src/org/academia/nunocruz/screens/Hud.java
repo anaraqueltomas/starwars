@@ -12,9 +12,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academia.nunocruz.StarWars;
 
-/**
- * Created by nunocruz on 29/10/15.
- */
 public class Hud implements Disposable {
 
     //Scenes2D Stage and its own Viewport for HUD
