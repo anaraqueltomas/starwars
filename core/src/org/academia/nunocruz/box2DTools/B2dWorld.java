@@ -11,15 +11,17 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import org.academia.nunocruz.StarWars;
+import org.academia.nunocruz.gameObjects.Enemies.Jawa;
 import org.academia.nunocruz.gameObjects.TileObjects.Brick;
 import org.academia.nunocruz.gameObjects.TileObjects.EnergyGlobe;
 import org.academia.nunocruz.gameObjects.Enemies.Enemy;
-import org.academia.nunocruz.gameObjects.Enemies.Stormtrooper;
+import org.academia.nunocruz.gameObjects.Enemies.Tusken;
 import org.academia.nunocruz.screens.PlayScreen;
 
 public class B2dWorld {
 
-    private Array<Stormtrooper> stormtroopers;
+    private Array<Tusken> tusken;
+    private Array<Jawa> jawa;
 
     public B2dWorld(PlayScreen screen){
 
@@ -72,21 +74,35 @@ public class B2dWorld {
 
             new EnergyGlobe(screen, object);
         }
+/**
+        //create all Tusken enemies;
+        tusken = new Array<Tusken>();
 
-        //create all stormtroopers;
-        stormtroopers = new Array<Stormtrooper>();
+        // layer 7 of the map tiled
+        for(MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            tusken.add(new Tusken(screen, rect.getX() / StarWars.PPM, rect.getY() / StarWars.PPM));
+        }
+
+        //create all Tusken enemies;
+        jawa = new Array<Jawa>();
+
+        // layer 6 of the map tiled
         for(MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            stormtroopers.add(new Stormtrooper(screen, rect.getX() / StarWars.PPM, rect.getY() /StarWars.PPM));
+            jawa.add(new Jawa(screen, rect.getX() / StarWars.PPM, rect.getY() / StarWars.PPM));
         }
+ */
     }
 
-    public Array<Stormtrooper> getStormtroopers() {
-        return stormtroopers;
+    public Array<Tusken> getTusken() {
+        return tusken;
     }
+
     public Array<Enemy> getEnemies(){
         Array<Enemy> enemies = new Array<Enemy>();
-        enemies.addAll(stormtroopers);
+/**     enemies.addAll(tusken);
+        enemies.addAll(jawa);  */
         return enemies;
     }
 }

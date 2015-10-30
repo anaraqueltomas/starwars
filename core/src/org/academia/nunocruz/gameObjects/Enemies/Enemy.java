@@ -6,9 +6,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import org.academia.nunocruz.screens.PlayScreen;
 
-/**
- * Created by brentaureli on 9/14/15.
- */
+
 public abstract class Enemy extends Sprite {
 
     protected World world;
@@ -20,8 +18,12 @@ public abstract class Enemy extends Sprite {
 
         this.world = screen.getWorld();
         this.screen = screen;
+
         setPosition(x, y);
+
         defineEnemy();
+
+        // y position so they fall down when hit a hole
         velocity = new Vector2(-1, -2);
         b2body.setActive(false);
     }
