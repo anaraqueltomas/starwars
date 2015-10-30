@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import org.academia.nunocruz.StarWars;
+import org.academia.nunocruz.screens.Hud;
 import org.academia.nunocruz.screens.PlayScreen;
 
 public class Luke extends Sprite {
@@ -25,6 +26,7 @@ public class Luke extends Sprite {
     private float stateTimer;
     private boolean runningRight;
     private boolean lukeIsDead;
+    private static Integer energyPoints = 20;
 
     public Luke(PlayScreen screen){
 
@@ -162,8 +164,9 @@ public class Luke extends Sprite {
     public void hit(){
 
         StarWars.manager.get("audio/music/gameMusic.wav", Music.class).stop();
-        StarWars.manager.get("audio/sounds/gameover.wav", Sound.class).play();
-        lukeIsDead = true;
+        //StarWars.manager.get("audio/sounds/gameover.wav", Sound.class).play();
+        //lukeIsDead = true;
+        subtractEnergyPoints(2);
     }
 
     public boolean isDead(){
@@ -181,6 +184,19 @@ public class Luke extends Sprite {
     public void jump() {
         b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
         currentState = State.JUMPING;
+    }
 
+    public static Integer getEnergyPoints() {
+        return energyPoints;
+    }
+
+    public static void addEnergyPoints(int value){
+        energyPoints += value;
+        Hud.setEnergyLabel();
+    }
+
+    public static void subtractEnergyPoints(int value){
+        energyPoints -= value;
+        Hud.setEnergyLabel();
     }
 }

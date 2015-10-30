@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academia.nunocruz.StarWars;
+import org.academia.nunocruz.gameObjects.Luke;
 
 public class Hud implements Disposable {
 
@@ -22,7 +23,7 @@ public class Hud implements Disposable {
     private static Integer worldTimer;
     private float timeCount;
     private static Integer score;
-    private static Integer energyPoints;
+
 
     //Scene2D widgets
     private Label countdownLabel;
@@ -40,7 +41,6 @@ public class Hud implements Disposable {
         worldTimer = 300;
         timeCount = 0;
         score = 0;
-        energyPoints = 20;
 
         //setup the HUD viewport using a new camera separate from our gamecam
         //define our stage using that viewport and our games spritebatch
@@ -54,7 +54,7 @@ public class Hud implements Disposable {
         //define our labels using the String, and a Label style consisting of a font and color
         countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE)); // Número de digitos, tipo de fonte e cor
         scoreLabel = new Label(String.format("%03d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        energyLabel = new Label(String.format("%03d", energyPoints), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        energyLabel = new Label(String.format("%03d", Luke.getEnergyPoints()), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("Time:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         levelLabel = new Label("1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         worldLabel = new Label("Level:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -91,18 +91,8 @@ public class Hud implements Disposable {
         scoreLabel.setText(String.format("%06d", score));
     }
 
-    public static void addEnergyPoints(int value){
-        energyPoints += value;
-        energyLabel.setText(String.format("%3d", energyPoints));
-    }
-
-    public static void subtractEnergyPoints(int value){
-        energyPoints -= value;
-        energyLabel.setText(String.format("%3d", energyPoints));
-    }
-
-    public static Integer getEnergyPoints() {
-        return energyPoints;
+    public static void setEnergyLabel (){
+        energyLabel.setText(String.format("%3d", Luke.getEnergyPoints()));
     }
 
     public static Integer getWorldTimer() {

@@ -197,7 +197,7 @@ public class PlayScreen implements Screen{
         //luke.isDead()
 
         if(luke.currentState == Luke.State.DEAD && luke.getStateTimer() > 1
-           || Hud.getEnergyPoints() <= 0  && luke.getStateTimer() > 1
+           || Luke.getEnergyPoints() <= 0  && luke.getStateTimer() > 1
            || Hud.getWorldTimer() <= 0 && luke.getStateTimer() > 1){
             return true;
         }
