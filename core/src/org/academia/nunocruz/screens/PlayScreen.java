@@ -105,10 +105,18 @@ public class PlayScreen implements Screen{
 
         //control our player using immediate impulses
          if(player.currentState != Luke.State.DEAD) {
+
              if (Gdx.input.isKeyJustPressed(Input.Keys.UP))
-                 player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
+
+                 /** Ana: FLAG to stop multiple jumps */
+                 if (player.currentState != Luke.State.JUMPING) {
+                     player.jump();
+                     player.setCurrentState(Luke.State.JUMPING);
+                 }
+
              if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
                  player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
+
              if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2)
                  player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
 

@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.Array;
 import org.academia.nunocruz.StarWars;
 import org.academia.nunocruz.screens.PlayScreen;
 
-public class Stormtrooper extends Enemy {
+public class Tusken extends Enemy {
 
     private float stateTime;
     private Animation walkAnimation;
@@ -19,7 +19,7 @@ public class Stormtrooper extends Enemy {
     private boolean destroyed;
 
 
-    public Stormtrooper(PlayScreen screen, float x, float y) {
+    public Tusken(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
         frames = new Array<TextureRegion>();

@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import org.academia.nunocruz.StarWars;
@@ -37,14 +38,14 @@ public class Luke extends Sprite {
         Array<TextureRegion> frames = new Array<TextureRegion>();
 
         //get run animation frames and add them to lukeRun Animation
-        for(int i=0; i<3; i++){
+        for(int i = 0; i < 3; i++){
             frames.add(new TextureRegion(getTexture(), i*32, 0, 32, 32));
         }
         lukeRun = new Animation(0.1f, frames);
         frames.clear();
 
         //get jump animation frames and add them to lukeJump Animation
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 4; i++) {
             frames.add(new TextureRegion(getTexture(), i*32, 0, 32, 32));
         }
         lukeJump = new Animation(0.1f, frames);
@@ -120,7 +121,7 @@ public class Luke extends Sprite {
     public State getState(){
         //Test to Box2D for velocity on the X and Y-Axis
         //if luke is going positive in Y-Axis he is jumping... or if he just jumped and is falling remain in jump state
-        if(b2body.getLinearVelocity().y > 0 || b2body.getLinearVelocity().y<0 && previousState == State.JUMPING ) {
+        if((b2body.getLinearVelocity().y > 0 && currentState == State.JUMPING) || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING)) {
             return State.JUMPING;
         }
         else if(lukeIsDead){
@@ -174,4 +175,13 @@ public class Luke extends Sprite {
         return stateTimer;
     }
 
+    public void setCurrentState(State currentState) {
+        this.currentState = currentState;
+    }
+
+    public void jump() {
+        b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
+        currentState = State.JUMPING;
+
+    }
 }
