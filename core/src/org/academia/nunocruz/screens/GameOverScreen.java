@@ -2,6 +2,7 @@ package org.academia.nunocruz.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -35,7 +36,7 @@ public class GameOverScreen implements Screen{
 
     @Override
     public void render(float delta) {
-        if(Gdx.input.justTouched()) {
+        if(Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             game.setScreen(new PlayScreen((StarWars) game));
             dispose();
         }

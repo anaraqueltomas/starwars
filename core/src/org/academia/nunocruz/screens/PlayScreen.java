@@ -123,6 +123,9 @@ public class PlayScreen implements Screen{
              if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && luke.b2body.getLinearVelocity().x >= -2)
                  luke.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), luke.b2body.getWorldCenter(), true);
 
+             if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
+                 luke.lukeIsKilling = true;
+
          }
     }
 
@@ -212,6 +215,7 @@ public class PlayScreen implements Screen{
             gameOverSound.play();
 
             Luke.health = 10;
+            Luke.score = 0;
             return true;
         }
         return false;

@@ -1,7 +1,9 @@
 package org.academia.nunocruz.gameObjects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -10,9 +12,11 @@ import org.academia.nunocruz.StarWars;
 import org.academia.nunocruz.screens.Hud;
 import org.academia.nunocruz.screens.PlayScreen;
 
+import javax.xml.soap.Text;
+
 public class Luke extends Sprite {
 
-    public enum State{ FALLING, JUMPING, STANDING, RUNNING, DEAD}
+    public enum State{ FALLING, JUMPING, STANDING, RUNNING, DEAD, KILLING}
     public State currentState;
     public State previousState;
 
@@ -21,11 +25,14 @@ public class Luke extends Sprite {
     private TextureRegion lukeStand;
     private Animation lukeRun;
     private Animation lukeJump;
+    private Animation lukeKill;
     private float stateTimer;
     private boolean runningRight;
     private boolean lukeIsDead;
+    public boolean lukeIsKilling;
     public static int health = 10;
     public static int score = 0;
+    public Array<TextureRegion> lukeStandArray = new Array<TextureRegion>();
 
 
     public Luke(PlayScreen screen){
@@ -37,41 +44,49 @@ public class Luke extends Sprite {
         stateTimer = 0;
         runningRight = true;
 
-        Array<TextureRegion> lukeStand = new Array<TextureRegion>();
+        //Array<TextureRegion> lukeWeapon = new Array<TextureRegion>();
 
         //get run animation frames and add them to lukeRun Animation
-        for(int i = 9; i < 12; i++){
-            lukeStand.add(new TextureRegion(getTexture(), (i * 32)+4, 70, 32, 32));
-        }
-        lukeRun = new Animation(0.1f, lukeStand);
-        lukeStand.clear();
 
-        //get jump animation frames and add them to lukeJump Animation
-        for(int i = 9; i < 12; i++){
-            lukeStand.add(new TextureRegion(getTexture(), (i * 32)+4, 70, 32, 32));
-        }
-        lukeJump = new Animation(0.1f, lukeStand);
+            lukeStandArray.add(new TextureRegion(getTexture(), 164, 36, 48, 32));
+            lukeStandArray.add(new TextureRegion(getTexture(), 164 + 48, 36, 48, 32));
 
+
+        lukeRun = new Animation(0.1f, lukeStandArray);
+        //lukeStand.clear();
+
+
+        lukeJump = new Animation(0.1f, lukeStandArray);
+/*
+        lukeWeapon = atlas.findRegion("lukeGun");
+        lukeKill = getAnimation(lukeWeapon, 2, 1, 1/4f);
+
+
+        for(int i = 5; i < 9; i++){
+            lukeWeapon.add(new TextureRegion(getTexture(), (i * 32)+3, 36, 32, 32));
+        }
+        lukeKill = new Animation(0.1f, lukeWeapon);
+*/
         //create texture region for luke standing
-        this.lukeStand = new TextureRegion(getTexture(),324,70,32,32);
+        this.lukeStand = new TextureRegion(getTexture(),164,36,48,32);
 
         //define mario in Box2d
         defineLuke();
 
         //set initial values for luke location, width and height. And initial frame as lukeStand.
-        setBounds(0,0,32/ StarWars.PPM,32 / StarWars.PPM);
+        setBounds(0,0, 48/ StarWars.PPM,32 / StarWars.PPM);
         setRegion(this.lukeStand);
 
     }
 
+
     public void update(float delta){
 
         //update our sprite to correspond with the position of our Box2D body
-        setPosition(b2body.getPosition().x - getWidth() /2, b2body.getPosition().y - getHeight() / 2);
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
         //update sprite with the correct frame
         setRegion(getFrame(delta));
-
     }
 
     public TextureRegion getFrame(float delta){
@@ -89,6 +104,10 @@ public class Luke extends Sprite {
                 break;
             case RUNNING:
                 region = lukeRun.getKeyFrame(stateTimer, true);
+                break;
+            case KILLING:
+                region = lukeRun.getKeyFrame(stateTimer, true);
+                lukeIsKilling = false;
                 break;
             case STANDING:
             case FALLING:
@@ -136,6 +155,8 @@ public class Luke extends Sprite {
             //if luke is positive or negative in the X axis he is running
         else if(b2body.getLinearVelocity().x != 0) {
             return State.RUNNING;
+        } else if (lukeIsKilling) {
+            return State.KILLING;
         }
             //if none of these return then he must be standing
         else{
@@ -193,7 +214,7 @@ public class Luke extends Sprite {
     public void becomeJedi() {
 
         // something else................
-
+        changeToLightsaber();
         score += 20;
         Hud.setScoreLabel();
     }
@@ -203,7 +224,17 @@ public class Luke extends Sprite {
         currentState = State.JUMPING;
     }
 
+    public void changeToLightsaber() {
+        lukeStandArray.clear();
+        lukeStandArray.add(new TextureRegion(getTexture(), 4, 70, 48, 32));
+        lukeStandArray.add(new TextureRegion(getTexture(), 48+4, 70, 48, 32));
+        lukeStandArray.add(new TextureRegion(getTexture(), 48+48+4, 70, 48, 32));
+        lukeStandArray.add(new TextureRegion(getTexture(), 48+48+48+4, 70, 48, 32));
 
+        lukeRun = new Animation(0.1f, lukeStandArray);
+        lukeJump = new Animation(0.1f, lukeStandArray);
+
+    }
 
 
 }
