@@ -3,13 +3,10 @@ package org.academia.nunocruz.screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academia.nunocruz.StarWars;
@@ -19,6 +16,7 @@ public class GameOverScreen implements Screen{
     private Viewport viewport;
     private Stage stage;
     private Game game;
+    private Texture img;
 
     public GameOverScreen(Game game){
 
@@ -26,20 +24,7 @@ public class GameOverScreen implements Screen{
         viewport = new FitViewport(StarWars.V_WIDTH, StarWars.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((StarWars) game).batch);
 
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
-
-        Table table = new Table();
-        table.center();
-        table.setFillParent(true);
-
-        Label gameOverLabel = new Label("GAME OVER", font);
-        Label playAgainLabel = new Label("Click to Play Again", font);
-
-        table.add(gameOverLabel).expandX();
-        table.row();
-        table.add(playAgainLabel).expandX().padTop(10f);
-
-        stage.addActor(table);
+        img = new Texture(Gdx.files.internal("gameOver.png"));
     }
 
     @Override
@@ -55,6 +40,11 @@ public class GameOverScreen implements Screen{
         }
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        ((StarWars) game).batch.begin();
+        ((StarWars) game).batch.draw(img, 10, 10);
+        ((StarWars) game).batch.end();
+
         stage.draw();
     }
 
