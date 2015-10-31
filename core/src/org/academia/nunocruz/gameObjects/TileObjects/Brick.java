@@ -12,4 +12,9 @@ public class Brick extends TileObject {
         fixture.setUserData(this);
         setCategoryFilter(StarWars.BRICK_BIT);
     }
+
+    @Override
+    public void onHit() {
+
+    }
 }
