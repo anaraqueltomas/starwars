@@ -20,7 +20,7 @@ public class Weapon extends Sprite {
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(64/ StarWars.PPM,64/ StarWars.PPM);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        b2body = world.createBody(bodyDef);
+        //b2body = world.createBody(bodyDef);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.filter.categoryBits = StarWars.LIGHTSABER_BIT;
@@ -31,7 +31,7 @@ public class Weapon extends Sprite {
 
         fixtureDef.shape = shape;
 
-        b2body.createFixture(fixtureDef).setUserData(this);
+        //b2body.createFixture(fixtureDef).setUserData(this);
     }
 
 

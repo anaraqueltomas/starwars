@@ -23,7 +23,6 @@ public class Hud implements Disposable {
     private static Integer worldTimer = 300;
     private float timeCount = 0;
 
-
     //Scene2D widgets
     private Label countdownLabel;
     private static Label scoreLabel;
@@ -31,13 +30,13 @@ public class Hud implements Disposable {
     private Label levelLabel;
     private Label worldLabel;
     private Label lukeLabel;
-    private Label energyPointsLabel;
-    private static Label energyLabel;
+    private static Label healthLabel;
+    private Label healthPointsLabel;
 
     public Hud(SpriteBatch sb){
 
 
-        //setup the HUD viewport using a new camera separate from our gamecam
+        //setup the HUD viewport using a new camera seperate from our gamecam
         //define our stage using that viewport and our games spritebatch
         viewport = new FitViewport(StarWars.V_WIDTH, StarWars.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,sb);
@@ -49,27 +48,25 @@ public class Hud implements Disposable {
         //define our labels using the String, and a Label style consisting of a font and color
         countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE)); // Número de digitos, tipo de fonte e cor
         scoreLabel = new Label(String.format("%03d", Luke.score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        energyLabel = new Label(String.format("%03d", Luke.health), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        healthLabel = new Label(String.format("%03d", Luke.health), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("Time:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         levelLabel = new Label("1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         worldLabel = new Label("Level:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         lukeLabel = new Label("Score:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        energyPointsLabel = new Label ("Energy:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-
+        healthPointsLabel = new Label ("Energy:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         //add our labels to our table, padding the top, and giving them all equal width with expandX
         table.add(lukeLabel).expandX().padTop(10); // o expandX partilha o espaço de igual forma no top, caso existam outras labels..
-        table.add(scoreLabel).expandX().padTop(10);
-        table.add(energyPointsLabel).expandX().padTop(10);
-        table.add(energyLabel).expandX().padTop(10);
         table.add(worldLabel).expandX().padTop(10);
-        table.add(levelLabel).expandX().padTop(10);;
         table.add(timeLabel).expandX().padTop(10);
-        table.add(countdownLabel).expandX().padTop(10);;
-        //table.row(); //criamos uma nova linha para a nossa table
+        table.row(); //criamos uma nova linha para a nossa table
+        table.add(scoreLabel).expandX();
+        table.add(levelLabel).expandX();
+        table.add(countdownLabel).expandX();
 
         //adicionamos a nossa table ao stage
         stage.addActor(table); //Adicionamos a table ao nosso stage
+
     }
 
     public void update(float delta){
@@ -82,7 +79,7 @@ public class Hud implements Disposable {
     }
 
     public static void setHealthLabel(){
-        energyLabel.setText(String.format("%3d", Luke.health));
+        healthLabel.setText(String.format("%3d", Luke.health));
     }
 
     public static void setScoreLabel() {
