@@ -111,8 +111,15 @@ public class PlayScreen implements Screen{
 
         //control our luke using immediate impulses
          if(luke.currentState != Luke.State.DEAD) {
+
              if (Gdx.input.isKeyJustPressed(Input.Keys.UP))
-                 luke.b2body.applyLinearImpulse(new Vector2(0, 4f), luke.b2body.getWorldCenter(), true);
+
+                /** Ana: FLAG to stop multiple jumps */
+                 if (luke.currentState != Luke.State.JUMPING) {
+                     luke.jump();
+                     luke.setCurrentState(Luke.State.JUMPING);
+                 }
+
              if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && luke.b2body.getLinearVelocity().x <= 2)
                  luke.b2body.applyLinearImpulse(new Vector2(0.1f, 0), luke.b2body.getWorldCenter(), true);
              if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && luke.b2body.getLinearVelocity().x >= -2)
@@ -193,7 +200,12 @@ public class PlayScreen implements Screen{
     public boolean gameOver(){
 
         if(luke.currentState == Luke.State.DEAD && luke.getStateTimer() > 1
-           || Hud.getWorldTimer() <= 0 /* && luke.getStateTimer() > 1 */ || luke.b2body.getPosition().y < 0 ) {
+
+           // quando o tempo acaba
+           || Hud.getWorldTimer() <= 0 /* && luke.getStateTimer() > 1 */
+                
+           // quando cai num buraco
+           || luke.b2body.getPosition().y < 0 ) {
             return true;
         }
         return false;
