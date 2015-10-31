@@ -55,18 +55,6 @@ public class Tusken extends Enemy {
         }
     }
 
-    public TextureRegion getFrame (float delta){
-        TextureRegion region = null;
-
-        if((b2body.getLinearVelocity().x<0 || !runningRight) && !region.isFlipX()){
-            region.flip(true, false);
-            runningRight = false;
-        } else if((b2body.getLinearVelocity().x>0 || runningRight)&& region.isFlipX()){
-            region.flip(true, false);
-            runningRight = true;
-        }
-        return region;
-    }
 
     @Override
     protected void defineEnemy() {

@@ -24,7 +24,7 @@ public class Luke extends Sprite {
     private float stateTimer;
     private boolean runningRight;
     private boolean lukeIsDead;
-    public static int health = 20;
+    public static int health = 10;
     public static int score = 0;
 
 
