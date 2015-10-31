@@ -66,7 +66,7 @@ public class PlayScreen implements Screen{
 
         //Load our map and setup our map renderer
         maploader = new TmxMapLoader();
-        map = maploader.load("Mapa/starwars.tmx");
+        map = maploader.load("Mapa/um.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1  / StarWars.PPM);
 
         //initially set our gamecam to be centered correctly at the start of of map
@@ -163,6 +163,7 @@ public class PlayScreen implements Screen{
         b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
+
         game.batch.begin();
 
         //desenha o player
