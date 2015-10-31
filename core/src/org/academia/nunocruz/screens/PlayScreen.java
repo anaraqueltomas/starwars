@@ -66,8 +66,7 @@ public class PlayScreen implements Screen{
         //create a FitViewport to maintain virtual aspect ratio despite screen size
         gamePort = new FitViewport(StarWars.V_WIDTH / StarWars.PPM, StarWars.V_HEIGHT / StarWars.PPM, gamecam);
 
-        //create our game HUD for scores/timers/level info
-        hud = new Hud(game.batch);
+
 
         //////
         gameOverScreen = new GameOverScreen(game);
@@ -88,6 +87,9 @@ public class PlayScreen implements Screen{
         //allows for debug lines of our box2d world.
         b2dr = new Box2DDebugRenderer();
         luke = new Luke(this);
+
+        //create our game HUD for scores/timers/level info
+        hud = new Hud(game.batch);
 
         creator = new B2dWorld(this);
 
@@ -179,7 +181,7 @@ public class PlayScreen implements Screen{
         renderer.render();
 
         //renderer our Box2DDebugLines
-        b2dr.render(world, gamecam.combined);
+        //b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
 
@@ -224,8 +226,6 @@ public class PlayScreen implements Screen{
             gameOverSound = StarWars.manager.get("audio/sounds/gameover.wav");
             gameOverSound.play();
 
-            Luke.health = 10;
-            Luke.score = 0;
             return true;
         }
         return false;
@@ -269,5 +269,6 @@ public class PlayScreen implements Screen{
         world.dispose();
         b2dr.dispose();
         hud.dispose();
+
     }
 }

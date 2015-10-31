@@ -26,8 +26,8 @@ public class Luke extends Sprite {
     private boolean runningRight;
     private boolean lukeIsDead;
     public boolean lukeIsKilling;
-    public static int health = 10;
-    public static int score = 0;
+    public static int health;
+    public static int score;
     public Array<TextureRegion> lukeStandArray = new Array<TextureRegion>();
 
 
@@ -39,6 +39,8 @@ public class Luke extends Sprite {
         previousState = State.STANDING;
         stateTimer = 0;
         runningRight = true;
+        score = 0;
+        health = 10;
 
         //Array<TextureRegion> lukeWeapon = new Array<TextureRegion>();
 
@@ -163,7 +165,7 @@ public class Luke extends Sprite {
     public void defineLuke(){
 
         BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set(256/StarWars.PPM,64/StarWars.PPM);
+        bodyDef.position.set(256 /StarWars.PPM,64/StarWars.PPM);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bodyDef);
 

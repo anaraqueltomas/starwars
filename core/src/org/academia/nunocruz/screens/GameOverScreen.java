@@ -4,10 +4,14 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academia.nunocruz.StarWars;
@@ -15,7 +19,6 @@ import org.academia.nunocruz.gameObjects.Luke;
 
 public class GameOverScreen implements Screen{
 
-    private Viewport viewport;
     private Stage stage;
     private Game game;
     private Texture img;
@@ -23,10 +26,22 @@ public class GameOverScreen implements Screen{
     public GameOverScreen(Game game){
 
         this.game = game;
-        viewport = new FitViewport(StarWars.V_WIDTH, StarWars.V_HEIGHT, new OrthographicCamera());
+        Viewport viewport = new FitViewport(StarWars.V_WIDTH, StarWars.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((StarWars) game).batch);
 
         img = new Texture(Gdx.files.internal("gameOver.png"));
+
+        Table table = new Table();
+        table.bottom();
+        table.setFillParent(true);
+
+        Label lukeLabel = new Label("Score:    ", new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
+        Label scoreLabel = new Label(String.format("%03d", Luke.score), new Label.LabelStyle(new BitmapFont(), Color.YELLOW));
+
+        table.add(lukeLabel).padBottom(10);
+        table.add(scoreLabel).padBottom(10);
+
+        stage.addActor(table);
     }
 
     @Override
