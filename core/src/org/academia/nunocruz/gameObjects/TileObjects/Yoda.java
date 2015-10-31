@@ -2,20 +2,24 @@ package org.academia.nunocruz.gameObjects.TileObjects;
 
 import com.badlogic.gdx.math.Rectangle;
 import org.academia.nunocruz.StarWars;
+import org.academia.nunocruz.gameObjects.Luke;
 import org.academia.nunocruz.screens.PlayScreen;
 
-/**
- * Created by nunocruz on 31/10/15.
- */
+
 public class Yoda extends TileObject {
+
+    private Luke luke;
+
     public Yoda(PlayScreen screen, Rectangle bounds) {
         super(screen, bounds);
         fixture.setUserData(this);
+        fixture.setSensor(true);
         setCategoryFilter(StarWars.YODA_BIT);
+        this.luke = screen.luke;
     }
 
     @Override
     public void onHit() {
-        System.out.println("Tocou");
+        this.luke.becomeJedi();
     }
 }

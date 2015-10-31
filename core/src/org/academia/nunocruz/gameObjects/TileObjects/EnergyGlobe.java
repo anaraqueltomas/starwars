@@ -8,7 +8,7 @@ import org.academia.nunocruz.screens.PlayScreen;
 public class EnergyGlobe extends TileObject {
 
     public int score = 10;
-    public int health = 5;
+    public int health = 2;
 
     private Sound energySound;
 
@@ -23,8 +23,8 @@ public class EnergyGlobe extends TileObject {
     @Override
     public void onHit() {
 
-        energySound = StarWars.manager.get("audio/sounds/catchEnergy.wav");
-        energySound.play();
+        //energySound = StarWars.manager.get("audio/sounds/catchEnergy.wav");
+        //energySound.play();
         setCategoryFilter(StarWars.DESTROYED_BIT);
         getCell().setTile(null);
 

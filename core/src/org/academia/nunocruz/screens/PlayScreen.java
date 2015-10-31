@@ -46,14 +46,15 @@ public class PlayScreen implements Screen{
     GameOverScreen gameOverScreen;
     FinishScreen finishScreen;
 
-    public static boolean victory = false;
+    public static boolean victory;
 
     private Sound gameOverSound;
 
     //Sprites
-    private Luke luke;
+    public Luke luke;
 
     public PlayScreen(StarWars game){
+        victory = false;
 
         atlas = new TextureAtlas("pack.atlas");
 
@@ -86,11 +87,11 @@ public class PlayScreen implements Screen{
 
         //allows for debug lines of our box2d world.
         b2dr = new Box2DDebugRenderer();
+        luke = new Luke(this);
 
         creator = new B2dWorld(this);
 
         //create luke in our game world
-        luke = new Luke(this);
 
         world.setContactListener(new B2dContactListener());
 

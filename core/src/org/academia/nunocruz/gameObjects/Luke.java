@@ -44,8 +44,8 @@ public class Luke extends Sprite {
 
         //get run animation frames and add them to lukeRun Animation
 
-            lukeStandArray.add(new TextureRegion(getTexture(), 154, 36, 48, 32));
-            lukeStandArray.add(new TextureRegion(getTexture(), 154 + 48, 36, 48, 32));
+        lukeStandArray.add(new TextureRegion(getTexture(), 154 + 48, 36, 48, 32));
+        lukeStandArray.add(new TextureRegion(getTexture(), 154, 36, 48, 32));
 
 
         lukeRun = new Animation(0.1f, lukeStandArray);
@@ -64,7 +64,7 @@ public class Luke extends Sprite {
         lukeKill = new Animation(0.1f, lukeWeapon);
 */
         //create texture region for luke standing
-        this.lukeStand = new TextureRegion(getTexture(),154,36,48,32);
+        this.lukeStand = new TextureRegion(getTexture(),154+48,36,48,32);
 
         //define mario in Box2d
         defineLuke();
@@ -205,8 +205,6 @@ public class Luke extends Sprite {
 
 
     public void becomeJedi() {
-
-        // something else................
         changeToLightsaber();
         score += 20;
         Hud.setScoreLabel();
@@ -219,13 +217,17 @@ public class Luke extends Sprite {
 
     public void changeToLightsaber() {
         lukeStandArray.clear();
-        lukeStandArray.add(new TextureRegion(getTexture(), 4, 70, 48, 32));
-        lukeStandArray.add(new TextureRegion(getTexture(), 48+4, 70, 48, 32));
-        lukeStandArray.add(new TextureRegion(getTexture(), 48+48+4, 70, 48, 32));
-        lukeStandArray.add(new TextureRegion(getTexture(), 48+48+48+4, 70, 48, 32));
+        lukeStandArray.add(new TextureRegion(getTexture(), 0, 70, 48, 32));
+        lukeStandArray.add(new TextureRegion(getTexture(), 48, 70, 48, 32));
+        lukeStandArray.add(new TextureRegion(getTexture(), 48+48, 70, 48, 32));
+        lukeStandArray.add(new TextureRegion(getTexture(), 48 + 48 + 48, 70, 48, 32));
 
         lukeRun = new Animation(0.1f, lukeStandArray);
         lukeJump = new Animation(0.1f, lukeStandArray);
 
+        this.lukeStand = new TextureRegion(getTexture(),48+48,70,48,32);
+
+        setBounds(0, 0, 48 / StarWars.PPM, 32 / StarWars.PPM);
+        setRegion(this.lukeStand);
     }
 }
