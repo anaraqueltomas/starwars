@@ -31,12 +31,13 @@ public class Tusken extends Enemy {
 
         for (int i = 0; i < 3; i++) {
             tuskens.add(new TextureRegion(screen.getAtlas().findRegion("tusken-rideres"), i * 32, 0, 32, 32));
-            
-        walkAnimation = new Animation(0.4f, tuskens);
 
-        setBounds(getX(), getY(), 32 / StarWars.PPM, 32 / StarWars.PPM);
-        setToDestroy = false;
-        destroyed = false;
+            walkAnimation = new Animation(0.4f, tuskens);
+
+            setBounds(getX(), getY(), 32 / StarWars.PPM, 32 / StarWars.PPM);
+            setToDestroy = false;
+            destroyed = false;
+        }
     }
 
     public void update(float dt){

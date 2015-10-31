@@ -15,7 +15,6 @@ public class StarWars extends Game {
 	public static final float PPM = 100;
 
 	//Box2D Collision Bits
-	public static final short NOTHING_BIT = 0;
 	public static final short GROUND_BIT = 1;
 	public static final short LUKE_BIT = 2;
 	public static final short BRICK_BIT = 4;
@@ -23,10 +22,9 @@ public class StarWars extends Game {
 	public static final short DESTROYED_BIT = 16;
 	public static final short OBJECT_BIT = 32;
 	public static final short ENEMY_BIT = 64;
-	public static final short FIREBALL_BIT = 128;
 
 	/** Ana */
-	public static final short LIGHTSABER_BIT = 256;
+	public static final short LIGHTSABER_BIT = 128;
 
 
 	public SpriteBatch batch;

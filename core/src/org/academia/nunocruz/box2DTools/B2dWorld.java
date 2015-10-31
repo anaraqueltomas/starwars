@@ -60,8 +60,9 @@ public class B2dWorld {
         }
 
         //create energy bodies/fixtures
-        for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
-            new EnergyGlobe(screen, object);
+        for(MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
+            new EnergyGlobe(screen, rectangle);
         }
 
         //create all jawas;

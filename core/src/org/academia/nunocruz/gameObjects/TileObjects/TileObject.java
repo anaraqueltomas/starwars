@@ -1,33 +1,27 @@
 package org.academia.nunocruz.gameObjects.TileObjects;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import org.academia.nunocruz.StarWars;
 import org.academia.nunocruz.screens.PlayScreen;
 
-public abstract class TileObject extends Sprite {
+public abstract class TileObject {
 
     protected World world;
     protected TiledMap map;
+    protected TiledMapTile tile;
     protected Rectangle bounds;
     protected Body body;
-    protected PlayScreen screen;
-    protected MapObject object;
-
     protected Fixture fixture;
 
-    public TileObject(PlayScreen screen, MapObject object){
+    public TileObject(PlayScreen screen, Rectangle bounds){
 
-        this.object = object;
-        this.screen = screen;
         this.world = screen.getWorld();
         this.map = screen.getMap();
-        this.bounds = ((RectangleMapObject) object).getRectangle();
+        this.bounds = bounds;
 
         BodyDef bdef = new BodyDef();
         FixtureDef fdef = new FixtureDef();
@@ -40,6 +34,7 @@ public abstract class TileObject extends Sprite {
 
         shape.setAsBox(bounds.getWidth() / 2 / StarWars.PPM, bounds.getHeight() / 2 / StarWars.PPM);
         fdef.shape = shape;
+        fdef.filter.categoryBits = StarWars.OBJECT_BIT;
         fixture = body.createFixture(fdef);
 
     }
@@ -53,7 +48,7 @@ public abstract class TileObject extends Sprite {
     public abstract void onHit();
 
     public TiledMapTileLayer.Cell getCell(){
-        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(1);
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(2);
         return layer.getCell((int)(body.getPosition().x * StarWars.PPM / 16),
                 (int)(body.getPosition().y * StarWars.PPM / 16));
     }
