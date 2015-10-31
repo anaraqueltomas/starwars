@@ -32,6 +32,7 @@ public class StarWars extends Game {
 	public SpriteBatch batch;
 
 	public static AssetManager manager;
+	public static Music music;
 
 	@Override
 	public void create () {
@@ -39,9 +40,18 @@ public class StarWars extends Game {
 		batch = new SpriteBatch();
 		manager = new AssetManager();
 		manager.load("audio/music/gameMusic.wav", Music.class);
-		manager.load("audio/sounds/energy.wav", Sound.class);
+		manager.load("audio/music/cantina.wav", Music.class);
+		manager.load("audio/sounds/catchEnergy.wav", Sound.class);
 		manager.load("audio/sounds/gameover.wav", Sound.class);
+		manager.load("audio/sounds/Lightsaber Turn On.wav", Sound.class);
+		manager.load("audio/sounds/monster_creature_grunt-1.mp3", Sound.class);
+		manager.load("audio/sounds/nave-endgame.wav", Sound.class);
 		manager.finishLoading();
+
+		music = StarWars.manager.get("audio/music/gameMusic.wav", Music.class);
+		music.setLooping(true);
+		music.setVolume(0.3f);
+		music.play();
 
 		setScreen(new HomeScreen(this));
 	}

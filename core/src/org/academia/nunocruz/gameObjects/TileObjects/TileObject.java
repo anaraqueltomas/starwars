@@ -1,5 +1,6 @@
 package org.academia.nunocruz.gameObjects.TileObjects;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -9,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import org.academia.nunocruz.StarWars;
 import org.academia.nunocruz.screens.PlayScreen;
 
-public abstract class TileObject {
+public abstract class TileObject extends Sprite {
 
     protected World world;
     protected TiledMap map;
