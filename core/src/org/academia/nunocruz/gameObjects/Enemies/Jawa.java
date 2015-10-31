@@ -11,9 +11,9 @@ import org.academia.nunocruz.StarWars;
 import org.academia.nunocruz.screens.PlayScreen;
 
 /**
- *  Ana
+ * Ana
  */
-public class Jawa extends Enemy{
+public class Jawa extends Enemy {
 
     private float stateTime;
     private Animation walkAnimation;
@@ -30,38 +30,32 @@ public class Jawa extends Enemy{
 
         jawaWalk = new Array<TextureRegion>();
 
-<<<<<<< HEAD
-        for(int i=0; i<2; i++) {
-            jawaWalk.add(new TextureRegion(screen.getAtlas().findRegion("jawa"), i * 32, 0 , 32, 32));
-=======
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 2; i++) {
             jawaWalk.add(new TextureRegion(screen.getAtlas().findRegion("jawa"), i * 32, 0, 32, 32));
->>>>>>> 0f3d5b677bff9bca30d015f8b1e43416167dfbde
-        }
 
-        walkAnimation = new Animation(0.4f, jawaWalk);
-        stateTime = 0;
-        setBounds(getX(), getY(), 32/ StarWars.PPM, 32 /StarWars.PPM);
-        setToDestroy = false;
-        destroyed = false;
+
+            walkAnimation = new Animation(0.4f, jawaWalk);
+            stateTime = 0;
+            setBounds(getX(), getY(), 32 / StarWars.PPM, 32 / StarWars.PPM);
+            setToDestroy = false;
+            destroyed = false;
+        }
     }
 
-    public void update(float dt){
+    public void update(float dt) {
 
         stateTime += dt;
-        if(setToDestroy && !destroyed){
+        if (setToDestroy && !destroyed) {
             world.destroyBody(b2body);
             destroyed = true;
             setRegion(new TextureRegion(screen.getAtlas().findRegion("jawa"), 32, 0, 32, 32));
             stateTime = 0;
-        }
-        else if(!destroyed) {
+        } else if (!destroyed) {
             b2body.setLinearVelocity(velocity);
             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
             setRegion(walkAnimation.getKeyFrame(stateTime, true));
         }
     }
-
 
 
     @Override
@@ -74,7 +68,7 @@ public class Jawa extends Enemy{
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(8 / StarWars.PPM, 16/StarWars.PPM);
+        shape.setAsBox(8 / StarWars.PPM, 16 / StarWars.PPM);
 
         fdef.filter.categoryBits = StarWars.ENEMY_BIT;
         fdef.filter.maskBits = StarWars.GROUND_BIT | StarWars.ENERGYGLOBE_BIT | StarWars.BRICK_BIT |
@@ -84,12 +78,9 @@ public class Jawa extends Enemy{
         b2body.createFixture(fdef).setUserData(this);
     }
 
-    public void draw(Batch batch){
+    public void draw(Batch batch) {
 
-        if(!destroyed || stateTime < 1)
+        if (!destroyed || stateTime < 1)
             super.draw(batch);
     }
-
-
-
 }
