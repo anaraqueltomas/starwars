@@ -39,7 +39,6 @@ public class Tusken extends Enemy {
             destroyed = false;
         }
     }
-
     public void update(float dt){
 
         stateTime += dt;

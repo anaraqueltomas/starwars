@@ -19,14 +19,14 @@ public class B2dContactListener implements ContactListener {
 
         switch (cDef){
 
-            case StarWars.ENEMY_BIT | StarWars.OBJECT_BIT:
+            /*case StarWars.ENEMY_BIT | StarWars.OBJECT_BIT:
 
                 //Se a fixtureA for um inimigo chama o metodo reverseVelocity, se não chama o metodo na fixtureB;
                 if(fixA.getFilterData().categoryBits == StarWars.ENEMY_BIT)
                     ((Enemy)fixA.getUserData()).reverseVelocity(true, false);
                 else
                     ((Enemy)fixB.getUserData()).reverseVelocity(true, false);
-                break;
+                break;*/
 
             case StarWars.LUKE_BIT | StarWars.ENEMY_BIT:
 
@@ -38,7 +38,7 @@ public class B2dContactListener implements ContactListener {
                     ((Luke)fixB.getUserData()).hit(((Enemy)fixA.getUserData()).damage);
                 }
                 break;
-
+/*
             case StarWars.ENEMY_BIT | StarWars.ENEMY_BIT:
 
                 //Se existir contacto entre dois inimigos, altera o sentido da deslocação dos mesmos;
@@ -47,7 +47,7 @@ public class B2dContactListener implements ContactListener {
                 ((Enemy)fixB.getUserData()).reverseVelocity(true, false);
 
                 break;
-
+*/
             case StarWars.LIGHTSABER_BIT | StarWars.ENEMY_BIT:
 
                 if(fixA.getFilterData().categoryBits == StarWars.ENEMY_BIT) {
@@ -65,6 +65,7 @@ public class B2dContactListener implements ContactListener {
                     ((Luke)fixA.getUserData()).gainHealth(((EnergyGlobe)fixB.getUserData()).health);
                     ((Luke)fixA.getUserData()).gainScore(((EnergyGlobe) fixB.getUserData()).score);
                     ((EnergyGlobe)fixB.getUserData()).onHit();
+
                 }
                 else {
                     ((Luke)fixB.getUserData()).gainHealth(((EnergyGlobe)fixA.getUserData()).health);
