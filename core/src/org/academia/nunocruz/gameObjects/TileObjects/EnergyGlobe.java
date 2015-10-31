@@ -1,5 +1,6 @@
 package org.academia.nunocruz.gameObjects.TileObjects;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import org.academia.nunocruz.StarWars;
@@ -12,6 +13,7 @@ public class EnergyGlobe extends TileObject {
     public int score = 10;
     public int health = 5;
     private int BLANK_ENERGY = 28;
+    private Sound energySound;
 
     public EnergyGlobe(PlayScreen screen, MapObject object){
         super(screen, object);
@@ -19,6 +21,8 @@ public class EnergyGlobe extends TileObject {
         tileSet = map.getTileSets().getTileSet("tileExemplo");
         fixture.setUserData(this);
         setCategoryFilter(StarWars.ENERGYGLOBE_BIT);
+        energySound = StarWars.manager.get("audio/sounds/catchEnergy.wav");
+        energySound.play();
     }
 
     @Override

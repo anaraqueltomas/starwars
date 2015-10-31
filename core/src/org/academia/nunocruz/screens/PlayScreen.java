@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -46,11 +47,10 @@ public class PlayScreen implements Screen{
     ////
     GameOverScreen gameOverScreen;
 
+    private Sound gameOverSound;
+
     //Sprites
     private Luke luke;
-
-    //Music
-    private Music music;
 
     public PlayScreen(StarWars game){
 
@@ -91,10 +91,9 @@ public class PlayScreen implements Screen{
 
         world.setContactListener(new B2dContactListener());
 
-        music = StarWars.manager.get("audio/music/gameMusic.wav", Music.class);
-        music.setLooping(true);
-        music.setVolume(0.3f);
-        music.play();
+        if(!StarWars.music.isPlaying()) {
+            StarWars.music.play();
+        }
 
     }
 
@@ -207,6 +206,11 @@ public class PlayScreen implements Screen{
                 
            // quando cai num buraco
            || luke.b2body.getPosition().y < 0 ) {
+
+            StarWars.music.stop();
+
+            gameOverSound = StarWars.manager.get("audio/sounds/gameover.wav");
+            gameOverSound.play();
             return true;
         }
         return false;
