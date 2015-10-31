@@ -85,6 +85,7 @@ public class B2dWorld {
     public Array<TuskenRider> getTuskenRiders() {
         return tuskenRiders;
     }
+
     public Array<Enemy> getEnemies(){
         Array<Enemy> enemies = new Array<Enemy>();
         enemies.addAll(tuskenRiders);

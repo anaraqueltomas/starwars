@@ -40,7 +40,7 @@ public class Luke extends Sprite {
         Array<TextureRegion> lukeStand = new Array<TextureRegion>();
 
         //get run animation frames and add them to lukeRun Animation
-        for(int i=9; i<12; i++){
+        for(int i = 9; i < 12; i++){
             lukeStand.add(new TextureRegion(getTexture(), (i * 32)+4, 70, 32, 32));
         }
         lukeRun = new Animation(0.1f, lukeStand);
@@ -145,13 +145,12 @@ public class Luke extends Sprite {
 
     public void defineLuke(){
 
-        // lightsaber  = Kinematic Body
         BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set(64/ StarWars.PPM,64/ StarWars.PPM);
+        bodyDef.position.set(64/StarWars.PPM,64/StarWars.PPM);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bodyDef);
 
-        //
+
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(8/StarWars.PPM,16/StarWars.PPM);
@@ -190,11 +189,6 @@ public class Luke extends Sprite {
         this.currentState = currentState;
     }
 
-    public void jump() {
-        b2body.applyLinearImpulse(new Vector2(0, 5f), b2body.getWorldCenter(), true);
-        currentState = State.JUMPING;
-    }
-
     public void becomeJedi() {
 
         // something else................
@@ -202,6 +196,12 @@ public class Luke extends Sprite {
         score += 20;
         Hud.setScoreLabel();
     }
+
+    public void jump() {
+        b2body.applyLinearImpulse(new Vector2(0, 5f), b2body.getWorldCenter(), true);
+        currentState = State.JUMPING;
+    }
+
 
 
 
