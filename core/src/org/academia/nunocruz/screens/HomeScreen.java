@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academia.nunocruz.StarWars;
+import org.academia.nunocruz.gameObjects.Luke;
 
 /**
  * Created by raqueldoria on 30/10/15.
@@ -39,18 +40,19 @@ public class HomeScreen implements Screen {
 
     @Override
     public void render(float delta) {
-            if(Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-                game.setScreen(new PlayScreen((StarWars) game));
-                dispose();
-            }
-            Gdx.gl.glClearColor(0, 0, 0, 1);
-            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            game.setScreen(new PlayScreen((StarWars) game));
+            dispose();
+        }
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-            ((StarWars) game).batch.begin();
-            ((StarWars) game).batch.draw(img, 10, 10);
-            ((StarWars) game).batch.end();
+        ((StarWars) game).batch.begin();
+        ((StarWars) game).batch.draw(img, 10, 10);
+        ((StarWars) game).batch.end();
 
-            stage.draw();
+        stage.draw();
+
     }
 
     @Override

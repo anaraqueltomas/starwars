@@ -19,14 +19,14 @@ public class B2dContactListener implements ContactListener {
 
         switch (cDef){
 
-            case StarWars.ENEMY_BIT | StarWars.OBJECT_BIT:
+            /*case StarWars.ENEMY_BIT | StarWars.OBJECT_BIT:
 
                 //Se a fixtureA for um inimigo chama o metodo reverseVelocity, se não chama o metodo na fixtureB;
                 if(fixA.getFilterData().categoryBits == StarWars.ENEMY_BIT)
                     ((Enemy)fixA.getUserData()).reverseVelocity(true, false);
                 else
                     ((Enemy)fixB.getUserData()).reverseVelocity(true, false);
-                break;
+                break;*/
 
             case StarWars.LUKE_BIT | StarWars.ENEMY_BIT:
 

@@ -210,6 +210,8 @@ public class PlayScreen implements Screen{
 
             gameOverSound = StarWars.manager.get("audio/sounds/gameover.wav");
             gameOverSound.play();
+
+            Luke.health = 10;
             return true;
         }
         return false;
