@@ -30,20 +30,16 @@ public class Jawa extends Enemy{
 
         jawaWalk = new Array<TextureRegion>();
 
-<<<<<<< HEAD
-        for(int i=0; i<2; i++) {
-            jawaWalk.add(new TextureRegion(screen.getAtlas().findRegion("jawa"), i * 32, 0 , 32, 32));
-=======
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 2; i++) {
             jawaWalk.add(new TextureRegion(screen.getAtlas().findRegion("jawa"), i * 32, 0, 32, 32));
->>>>>>> 0f3d5b677bff9bca30d015f8b1e43416167dfbde
-        }
 
-        walkAnimation = new Animation(0.4f, jawaWalk);
-        stateTime = 0;
-        setBounds(getX(), getY(), 32/ StarWars.PPM, 32 /StarWars.PPM);
-        setToDestroy = false;
-        destroyed = false;
+
+            walkAnimation = new Animation(0.4f, jawaWalk);
+            stateTime = 0;
+            setBounds(getX(), getY(), 32 / StarWars.PPM, 32 / StarWars.PPM);
+            setToDestroy = false;
+            destroyed = false;
+        }
     }
 
     public void update(float dt){

@@ -199,7 +199,7 @@ public class Luke extends Sprite {
     }
 
     public void jump() {
-        b2body.applyLinearImpulse(new Vector2(0, 5f), b2body.getWorldCenter(), true);
+        b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
         currentState = State.JUMPING;
     }
 

@@ -69,6 +69,8 @@ public class B2dWorld {
         for(MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             jawas.add(new Jawa(screen, rect.getX() / StarWars.PPM, rect.getY() / StarWars.PPM));
+            fdef.filter.categoryBits = StarWars.ENEMY_BIT;
+
         }
 
         //create all tuskens;
@@ -76,6 +78,8 @@ public class B2dWorld {
         for(MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             tuskens.add(new Tusken(screen, rect.getX() / StarWars.PPM, rect.getY() / StarWars.PPM));
+            fdef.filter.categoryBits = StarWars.ENEMY_BIT;
+
         }
 
     }

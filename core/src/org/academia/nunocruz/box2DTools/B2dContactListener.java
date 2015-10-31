@@ -58,7 +58,7 @@ public class B2dContactListener implements ContactListener {
                     ((Enemy)fixB.getUserData()).hit(((Weapon)fixA.getUserData()).damage);
                 }
                 break;
-
+/*
             case StarWars.LUKE_BIT | StarWars.ENERGYGLOBE_BIT:
 
                 if(fixA.getFilterData().categoryBits == StarWars.LUKE_BIT) {
@@ -68,10 +68,9 @@ public class B2dContactListener implements ContactListener {
                 else {
                     ((Luke)fixB.getUserData()).gainHealth(((EnergyGlobe)fixA.getUserData()).health);
                     ((Luke)fixB.getUserData()).gainScore(((EnergyGlobe)fixA.getUserData()).score);
-
                 }
                 break;
-
+*/
         }
     }
 
