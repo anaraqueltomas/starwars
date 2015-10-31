@@ -1,14 +1,12 @@
 package org.academia.nunocruz.gameObjects.TileObjects;
 
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.math.Rectangle;
 import org.academia.nunocruz.StarWars;
 import org.academia.nunocruz.screens.PlayScreen;
 
 public class EnergyGlobe extends TileObject {
 
-    private static TiledMapTileSet tileSet;
     public int score = 10;
     public int health = 5;
 

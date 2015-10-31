@@ -55,7 +55,6 @@ public class Hud implements Disposable {
         lukeLabel = new Label("Score:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         healthPointsLabel = new Label ("Health:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-
         //add our labels to our table, padding the top, and giving them all equal width with expandX
         table.add(lukeLabel).expandX().padTop(10); // o expandX partilha o espaço de igual forma no top, caso existam outras labels..
         table.add(scoreLabel).expandX().padTop(10);

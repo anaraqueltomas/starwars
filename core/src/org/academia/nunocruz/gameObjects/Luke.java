@@ -157,7 +157,7 @@ public class Luke extends Sprite {
 
         fixtureDef.filter.categoryBits = StarWars.LUKE_BIT;
         fixtureDef.filter.maskBits = StarWars.GROUND_BIT | StarWars.ENERGYGLOBE_BIT | StarWars.BRICK_BIT|
-                StarWars.ENEMY_BIT| StarWars.OBJECT_BIT;
+                StarWars.ENEMY_BIT| StarWars.OBJECT_BIT | StarWars.SPACESHIP_BIT | StarWars.YODA_BIT;
 
         fixtureDef.shape = shape;
         b2body.createFixture(fixtureDef).setUserData(this);
@@ -178,10 +178,6 @@ public class Luke extends Sprite {
         Hud.setHealthLabel();
     }
 
-    public boolean isDead(){
-        return lukeIsDead;
-    }
-
     public float getStateTimer(){
         return stateTimer;
     }
@@ -190,20 +186,9 @@ public class Luke extends Sprite {
         this.currentState = currentState;
     }
 
-    public void becomeJedi() {
-
-        // something else................
-
-        score += 20;
-        Hud.setScoreLabel();
-    }
-
     public void jump() {
         b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
         currentState = State.JUMPING;
     }
-
-
-
 
 }

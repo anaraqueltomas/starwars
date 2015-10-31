@@ -5,6 +5,8 @@ import org.academia.nunocruz.StarWars;
 import org.academia.nunocruz.gameObjects.Enemies.Enemy;
 import org.academia.nunocruz.gameObjects.Luke;
 import org.academia.nunocruz.gameObjects.TileObjects.EnergyGlobe;
+import org.academia.nunocruz.gameObjects.TileObjects.SpaceShip;
+import org.academia.nunocruz.gameObjects.TileObjects.Yoda;
 import org.academia.nunocruz.gameObjects.Weapon;
 
 public class B2dContactListener implements ContactListener {
@@ -17,63 +19,58 @@ public class B2dContactListener implements ContactListener {
 
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
-        switch (cDef){
-
-            /*case StarWars.ENEMY_BIT | StarWars.OBJECT_BIT:
-
-                //Se a fixtureA for um inimigo chama o metodo reverseVelocity, se não chama o metodo na fixtureB;
-                if(fixA.getFilterData().categoryBits == StarWars.ENEMY_BIT)
-                    ((Enemy)fixA.getUserData()).reverseVelocity(true, false);
-                else
-                    ((Enemy)fixB.getUserData()).reverseVelocity(true, false);
-                break;*/
+        switch (cDef) {
 
             case StarWars.LUKE_BIT | StarWars.ENEMY_BIT:
 
                 //Se a fixA for o Luke chama o metodo hit, se não chama o metodo na fixtureB;
-                if(fixA.getFilterData().categoryBits == StarWars.LUKE_BIT) {
-                    ((Luke)fixA.getUserData()).hit(((Enemy)fixB.getUserData()).damage);
-                }
-                else {
-                    ((Luke)fixB.getUserData()).hit(((Enemy)fixA.getUserData()).damage);
+                if (fixA.getFilterData().categoryBits == StarWars.LUKE_BIT) {
+                    ((Luke) fixA.getUserData()).hit(((Enemy) fixB.getUserData()).damage);
+                } else {
+                    ((Luke) fixB.getUserData()).hit(((Enemy) fixA.getUserData()).damage);
                 }
                 break;
-/*
-            case StarWars.ENEMY_BIT | StarWars.ENEMY_BIT:
 
-                //Se existir contacto entre dois inimigos, altera o sentido da deslocação dos mesmos;
-
-                ((Enemy)fixA.getUserData()).reverseVelocity(true, false);
-                ((Enemy)fixB.getUserData()).reverseVelocity(true, false);
-
-                break;
-*/
             case StarWars.LIGHTSABER_BIT | StarWars.ENEMY_BIT:
 
-                if(fixA.getFilterData().categoryBits == StarWars.ENEMY_BIT) {
-                    ((Enemy)fixA.getUserData()).hit(((Weapon) fixB.getUserData()).damage);
+                if (fixA.getFilterData().categoryBits == StarWars.ENEMY_BIT) {
+                    ((Enemy) fixA.getUserData()).hit(((Weapon) fixB.getUserData()).damage);
 
-                }
-                else {
-                    ((Enemy)fixB.getUserData()).hit(((Weapon) fixA.getUserData()).damage);
+                } else {
+                    ((Enemy) fixB.getUserData()).hit(((Weapon) fixA.getUserData()).damage);
                 }
                 break;
 
             case StarWars.LUKE_BIT | StarWars.ENERGYGLOBE_BIT:
 
-                if(fixA.getFilterData().categoryBits == StarWars.LUKE_BIT) {
-                    ((Luke)fixA.getUserData()).gainHealth(((EnergyGlobe)fixB.getUserData()).health);
-                    ((Luke)fixA.getUserData()).gainScore(((EnergyGlobe) fixB.getUserData()).score);
-                    ((EnergyGlobe)fixB.getUserData()).onHit();
+                if (fixA.getFilterData().categoryBits == StarWars.LUKE_BIT) {
+                    ((Luke) fixA.getUserData()).gainHealth(((EnergyGlobe) fixB.getUserData()).health);
+                    ((Luke) fixA.getUserData()).gainScore(((EnergyGlobe) fixB.getUserData()).score);
+                    ((EnergyGlobe) fixB.getUserData()).onHit();
 
-                }
-                else {
-                    ((Luke)fixB.getUserData()).gainHealth(((EnergyGlobe)fixA.getUserData()).health);
-                    ((Luke)fixB.getUserData()).gainScore(((EnergyGlobe) fixA.getUserData()).score);
-                    ((EnergyGlobe)fixA.getUserData()).onHit();
+                } else {
+                    ((Luke) fixB.getUserData()).gainHealth(((EnergyGlobe) fixA.getUserData()).health);
+                    ((Luke) fixB.getUserData()).gainScore(((EnergyGlobe) fixA.getUserData()).score);
+                    ((EnergyGlobe) fixA.getUserData()).onHit();
                 }
                 break;
 
+            case StarWars.LUKE_BIT | StarWars.SPACESHIP_BIT:
+                if (fixA.getFilterData().categoryBits == StarWars.LUKE_BIT) {
+                    ((SpaceShip) fixB.getUserData()).onHit();
+
+                } else {
+                    ((SpaceShip) fixA.getUserData()).onHit();
+                }
+                break;
+            case StarWars.LUKE_BIT | StarWars.YODA_BIT:
+                if (fixA.getFilterData().categoryBits == StarWars.LUKE_BIT) {
+                    ((Yoda) fixB.getUserData()).onHit();
+
+                } else {
+                    ((Yoda) fixA.getUserData()).onHit();
+                }
+                break;
         }
     }
 

@@ -26,7 +26,6 @@ public class PlayScreen implements Screen{
     //Reference to our Game, used to set Screens
     private StarWars game;
     private TextureAtlas atlas;
-    public static boolean alreadyDestroyed = false;
 
     //basic playscreen variables
     private OrthographicCamera gamecam;
@@ -45,6 +44,9 @@ public class PlayScreen implements Screen{
 
     ////
     GameOverScreen gameOverScreen;
+    FinishScreen finishScreen;
+
+    public static boolean victory = false;
 
     private Sound gameOverSound;
 
@@ -68,6 +70,8 @@ public class PlayScreen implements Screen{
 
         //////
         gameOverScreen = new GameOverScreen(game);
+
+        finishScreen = new FinishScreen(game);
 
         //Load our map and setup our map renderer
         maploader = new TmxMapLoader();
@@ -171,7 +175,7 @@ public class PlayScreen implements Screen{
         renderer.render();
 
         //renderer our Box2DDebugLines
-       // b2dr.render(world, gamecam.combined);
+        b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
 
@@ -194,6 +198,11 @@ public class PlayScreen implements Screen{
             game.setScreen(new GameOverScreen(game));
             dispose();
         }
+
+        if(victory){
+            game.setScreen(new FinishScreen(game));
+            dispose();
+        }
     }
 
     public boolean gameOver(){
@@ -212,10 +221,13 @@ public class PlayScreen implements Screen{
             gameOverSound.play();
 
             Luke.health = 10;
+            Luke.score = 0;
+
             return true;
         }
         return false;
     }
+
 
     @Override
     public void resize(int width, int height) {

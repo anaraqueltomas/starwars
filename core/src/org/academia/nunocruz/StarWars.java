@@ -22,10 +22,9 @@ public class StarWars extends Game {
 	public static final short DESTROYED_BIT = 16;
 	public static final short OBJECT_BIT = 32;
 	public static final short ENEMY_BIT = 64;
-
-	/** Ana */
 	public static final short LIGHTSABER_BIT = 128;
-
+	public static final short SPACESHIP_BIT = 256;
+	public static final short YODA_BIT = 512;
 
 	public SpriteBatch batch;
 
@@ -44,6 +43,7 @@ public class StarWars extends Game {
 		manager.load("audio/sounds/Lightsaber Turn On.wav", Sound.class);
 		manager.load("audio/sounds/monster_creature_grunt-1.mp3", Sound.class);
 		manager.load("audio/sounds/nave-endgame.wav", Sound.class);
+		manager.load("audio/sounds/victorySound.mp3", Sound.class);
 		manager.finishLoading();
 
 		music = StarWars.manager.get("audio/music/gameMusic.wav", Music.class);

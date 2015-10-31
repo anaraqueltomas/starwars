@@ -1,12 +1,9 @@
 package org.academia.nunocruz.gameObjects.Enemies;
 
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import org.academia.nunocruz.StarWars;
 import org.academia.nunocruz.gameObjects.Luke;
 import org.academia.nunocruz.screens.PlayScreen;
 
@@ -27,7 +24,7 @@ public abstract class Enemy extends Sprite {
     public int damage;
     public int score;
 
-    public Enemy(PlayScreen screen, float x, float y){
+    public Enemy(PlayScreen screen, float x, float y) {
 
         this.world = screen.getWorld();
         this.screen = screen;
@@ -41,14 +38,16 @@ public abstract class Enemy extends Sprite {
 
     public abstract void update(float dt);
 
-    public void reverseVelocity(boolean x, boolean y){
-        if(x)
+    public void reverseVelocity(boolean x, boolean y) {
+        if (x)
             velocity.x = -velocity.x;
-        if(y)
+        if (y)
             velocity.y = -velocity.y;
     }
 
-    /** Ana: defining hit method */
+    /**
+     * Ana: defining hit method
+     */
     public void hit(int n) {
 
         health -= n;
