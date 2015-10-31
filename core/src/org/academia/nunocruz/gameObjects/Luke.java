@@ -146,7 +146,7 @@ public class Luke extends Sprite {
     public void defineLuke(){
 
         BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set(64/StarWars.PPM,64/StarWars.PPM);
+        bodyDef.position.set(256/StarWars.PPM,64/StarWars.PPM);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bodyDef);
 

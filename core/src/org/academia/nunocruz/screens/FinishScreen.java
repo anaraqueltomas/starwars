@@ -11,9 +11,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academia.nunocruz.StarWars;
 
-/**
- * Created by raqueldoria on 31/10/15.
- */
+
 public class FinishScreen implements Screen {
 
     private Viewport viewport;

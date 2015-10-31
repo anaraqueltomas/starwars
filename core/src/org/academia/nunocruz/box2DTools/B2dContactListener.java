@@ -38,7 +38,7 @@ public class B2dContactListener implements ContactListener {
                     ((Luke)fixB.getUserData()).hit(((Enemy)fixA.getUserData()).damage);
                 }
                 break;
-
+/*
             case StarWars.ENEMY_BIT | StarWars.ENEMY_BIT:
 
                 //Se existir contacto entre dois inimigos, altera o sentido da deslocação dos mesmos;
@@ -47,7 +47,7 @@ public class B2dContactListener implements ContactListener {
                 ((Enemy)fixB.getUserData()).reverseVelocity(true, false);
 
                 break;
-
+*/
             case StarWars.LIGHTSABER_BIT | StarWars.ENEMY_BIT:
 
                 if(fixA.getFilterData().categoryBits == StarWars.ENEMY_BIT) {
@@ -58,19 +58,20 @@ public class B2dContactListener implements ContactListener {
                     ((Enemy)fixB.getUserData()).hit(((Weapon)fixA.getUserData()).damage);
                 }
                 break;
-/*
+
             case StarWars.LUKE_BIT | StarWars.ENERGYGLOBE_BIT:
 
                 if(fixA.getFilterData().categoryBits == StarWars.LUKE_BIT) {
                     ((Luke)fixA.getUserData()).gainHealth(((EnergyGlobe)fixB.getUserData()).health);
                     ((Luke)fixA.getUserData()).gainScore(((EnergyGlobe)fixB.getUserData()).score);
+
                 }
                 else {
                     ((Luke)fixB.getUserData()).gainHealth(((EnergyGlobe)fixA.getUserData()).health);
                     ((Luke)fixB.getUserData()).gainScore(((EnergyGlobe)fixA.getUserData()).score);
                 }
                 break;
-*/
+
         }
     }
 
