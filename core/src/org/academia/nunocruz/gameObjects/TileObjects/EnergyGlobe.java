@@ -11,6 +11,8 @@ import org.academia.nunocruz.screens.PlayScreen;
 public class EnergyGlobe extends TileObject {
 
     private static TiledMapTileSet tileSet;
+    public int score = 10;
+    public int health = 5;
 
     public EnergyGlobe(PlayScreen screen, MapObject object){
         super(screen, object);

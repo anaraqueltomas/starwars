@@ -194,11 +194,8 @@ public class PlayScreen implements Screen{
 
     public boolean gameOver(){
 
-        //luke.isDead()
-
         if(luke.currentState == Luke.State.DEAD && luke.getStateTimer() > 1
-           || Luke.getEnergyPoints() <= 0  && luke.getStateTimer() > 1
-           || Hud.getWorldTimer() <= 0 && luke.getStateTimer() > 1){
+           || Hud.getWorldTimer() <= 0 /* && luke.getStateTimer() > 1 */ || luke.b2body.getPosition().y < 0 ) {
             return true;
         }
         return false;

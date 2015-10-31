@@ -20,9 +20,8 @@ public class Hud implements Disposable {
     private Viewport viewport;
 
     //Luke score/time Tracking Variables
-    private static Integer worldTimer;
-    private float timeCount;
-    private static Integer score;
+    private static Integer worldTimer = 300;
+    private float timeCount = 0;
 
 
     //Scene2D widgets
@@ -37,10 +36,6 @@ public class Hud implements Disposable {
 
     public Hud(SpriteBatch sb){
 
-        //Definimos as nossas tracking variables
-        worldTimer = 300;
-        timeCount = 0;
-        score = 0;
 
         //setup the HUD viewport using a new camera separate from our gamecam
         //define our stage using that viewport and our games spritebatch
@@ -53,8 +48,8 @@ public class Hud implements Disposable {
 
         //define our labels using the String, and a Label style consisting of a font and color
         countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE)); // Número de digitos, tipo de fonte e cor
-        scoreLabel = new Label(String.format("%03d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        energyLabel = new Label(String.format("%03d", Luke.getEnergyPoints()), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scoreLabel = new Label(String.format("%03d", Luke.score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        energyLabel = new Label(String.format("%03d", Luke.health), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("Time:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         levelLabel = new Label("1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         worldLabel = new Label("Level:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -86,14 +81,14 @@ public class Hud implements Disposable {
         }
     }
 
-    public static void addScore(int value){
-        score += value;
-        scoreLabel.setText(String.format("%06d", score));
+    public static void setHealthLabel(){
+        energyLabel.setText(String.format("%3d", Luke.health));
     }
 
-    public static void setEnergyLabel (){
-        energyLabel.setText(String.format("%3d", Luke.getEnergyPoints()));
+    public static void setScoreLabel() {
+        scoreLabel.setText(String.format("%06d", Luke.score));
     }
+
 
     public static Integer getWorldTimer() {
         return worldTimer;

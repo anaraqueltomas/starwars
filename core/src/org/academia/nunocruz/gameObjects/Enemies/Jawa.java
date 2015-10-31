@@ -23,15 +23,12 @@ public class Jawa extends Enemy{
     private Array<TextureRegion> frames;
 
 
-
-    /** Ana: defining the hit method */
-
-
     public Jawa(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
         health = 6;
         damage = 1;
+        score = 5;
 
         frames = new Array<TextureRegion>();
 

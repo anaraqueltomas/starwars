@@ -1,7 +1,5 @@
 package org.academia.nunocruz.gameObjects;
 
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -26,7 +24,8 @@ public class Luke extends Sprite {
     private float stateTimer;
     private boolean runningRight;
     private boolean lukeIsDead;
-    private static Integer energyPoints = 20;
+    public static int health = 20;
+    public static int score = 0;
 
 
     public Luke(PlayScreen screen){
@@ -146,11 +145,13 @@ public class Luke extends Sprite {
 
     public void defineLuke(){
 
+        // lightsaber  = Kinematic Body
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(64/ StarWars.PPM,64/ StarWars.PPM);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bodyDef);
 
+        //
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(8/StarWars.PPM,16/StarWars.PPM);
@@ -163,11 +164,18 @@ public class Luke extends Sprite {
     }
 
     public void hit(int n){
+        health -= n;
+        Hud.setHealthLabel();
+        if (health <= 0) { lukeIsDead = true; }
+    }
 
-        StarWars.manager.get("audio/music/gameMusic.wav", Music.class).stop();
-        //StarWars.manager.get("audio/sounds/gameover.wav", Sound.class).play();
-        //lukeIsDead = true;
-        subtractEnergyPoints(2);
+    public static void gainScore(int n) {
+        score += n;
+        Hud.setScoreLabel();
+    }
+    public static void gainHealth(int n) {
+        health += n;
+        Hud.setHealthLabel();
     }
 
     public boolean isDead(){
@@ -187,17 +195,14 @@ public class Luke extends Sprite {
         currentState = State.JUMPING;
     }
 
-    public static Integer getEnergyPoints() {
-        return energyPoints;
+    public void becomeJedi() {
+
+        // something else................
+
+        score += 20;
+        Hud.setScoreLabel();
     }
 
-    public static void addEnergyPoints(int value){
-        energyPoints += value;
-        Hud.setEnergyLabel();
-    }
 
-    public static void subtractEnergyPoints(int value){
-        energyPoints -= value;
-        Hud.setEnergyLabel();
-    }
+
 }

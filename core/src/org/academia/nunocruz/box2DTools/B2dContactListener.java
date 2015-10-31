@@ -3,8 +3,9 @@ package org.academia.nunocruz.box2DTools;
 import com.badlogic.gdx.physics.box2d.*;
 import org.academia.nunocruz.StarWars;
 import org.academia.nunocruz.gameObjects.Enemies.Enemy;
-import org.academia.nunocruz.gameObjects.Lightsaber;
+import org.academia.nunocruz.gameObjects.Weapon;
 import org.academia.nunocruz.gameObjects.Luke;
+import org.academia.nunocruz.gameObjects.TileObjects.EnergyGlobe;
 
 public class B2dContactListener implements ContactListener {
 
@@ -48,10 +49,24 @@ public class B2dContactListener implements ContactListener {
             case StarWars.LIGHTSABER_BIT | StarWars.ENEMY_BIT:
 
                 if(fixA.getFilterData().categoryBits == StarWars.ENEMY_BIT) {
-                    ((Enemy)fixA.getUserData()).hit(((Lightsaber)fixB.getUserData()).damage);
+                    ((Enemy)fixA.getUserData()).hit(((Weapon) fixB.getUserData()).damage);
+
                 }
                 else {
-                    ((Enemy)fixB.getUserData()).hit(((Lightsaber)fixA.getUserData()).damage);
+                    ((Enemy)fixB.getUserData()).hit(((Weapon)fixA.getUserData()).damage);
+                }
+                break;
+
+            case StarWars.LUKE_BIT | StarWars.ENERGYGLOBE_BIT:
+
+                if(fixA.getFilterData().categoryBits == StarWars.LUKE_BIT) {
+                    ((Luke)fixA.getUserData()).gainHealth(((EnergyGlobe)fixB.getUserData()).health);
+                    ((Luke)fixA.getUserData()).gainScore(((EnergyGlobe)fixB.getUserData()).score);
+                }
+                else {
+                    ((Luke)fixB.getUserData()).gainHealth(((EnergyGlobe)fixA.getUserData()).health);
+                    ((Luke)fixB.getUserData()).gainScore(((EnergyGlobe)fixA.getUserData()).score);
+
                 }
                 break;
 
