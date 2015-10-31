@@ -12,20 +12,15 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academia.nunocruz.StarWars;
 
-/**
- * Created by raqueldoria on 30/10/15.
- */
 public class HomeScreen implements Screen {
 
-    private Viewport viewport;
     private Stage stage;
     private Game game;
     private Texture img;
 
-
     public HomeScreen(Game game) {
         this.game = game;
-        viewport = new FitViewport(StarWars.V_WIDTH, StarWars.V_HEIGHT, new OrthographicCamera());
+        Viewport viewport = new FitViewport(StarWars.V_WIDTH, StarWars.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((StarWars) game).batch);
 
         img = new Texture(Gdx.files.internal("introScreen.png"));

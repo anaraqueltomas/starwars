@@ -7,9 +7,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import org.academia.nunocruz.gameObjects.Luke;
 import org.academia.nunocruz.screens.PlayScreen;
 
-/**
- * Created by brentaureli on 9/14/15.
- */
+
 public abstract class Enemy extends Sprite {
 
     protected World world;
@@ -38,18 +36,7 @@ public abstract class Enemy extends Sprite {
 
     public abstract void update(float dt);
 
-    public void reverseVelocity(boolean x, boolean y) {
-        if (x)
-            velocity.x = -velocity.x;
-        if (y)
-            velocity.y = -velocity.y;
-    }
-
-    /**
-     * Ana: defining hit method
-     */
     public void hit(int n) {
-
         health -= n;
         if (health <= 0) {
             setToDestroy = true;

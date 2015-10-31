@@ -17,8 +17,6 @@ public class Jawa extends Enemy {
 
     private float stateTime;
     private Animation walkAnimation;
-    private Array<TextureRegion> jawaWalk;
-    private boolean runningRight;
 
 
     public Jawa(PlayScreen screen, float x, float y) {
@@ -28,7 +26,7 @@ public class Jawa extends Enemy {
         damage = 1;
         score = 5;
 
-        jawaWalk = new Array<TextureRegion>();
+        Array<TextureRegion> jawaWalk = new Array<TextureRegion>();
 
         for (int i = 0; i < 2; i++) {
             jawaWalk.add(new TextureRegion(screen.getAtlas().findRegion("jawa"), i * 32, 0, 32, 32));

@@ -17,7 +17,6 @@ public class Hud implements Disposable {
 
     //Scenes2D Stage and its own Viewport for HUD
     public Stage stage;
-    private Viewport viewport;
 
     //Luke score/time Tracking Variables
     private static Integer worldTimer = 300;
@@ -26,37 +25,32 @@ public class Hud implements Disposable {
     //Scene2D widgets
     private Label countdownLabel;
     private static Label scoreLabel;
-    private Label timeLabel;
-    private Label levelLabel;
-    private Label worldLabel;
-    private Label lukeLabel;
     private static Label healthLabel;
-    private Label healthPointsLabel;
 
     public Hud(SpriteBatch sb){
 
 
         //setup the HUD viewport using a new camera seperate from our gamecam
         //define our stage using that viewport and our games spritebatch
-        viewport = new FitViewport(StarWars.V_WIDTH, StarWars.V_HEIGHT, new OrthographicCamera());
+        Viewport viewport = new FitViewport(StarWars.V_WIDTH, StarWars.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,sb);
 
-        Table table = new Table(); //por default vem alinhada ao centro do ecran (V_WIDTH/2, V_HEIGHT/2)
-        table.top(); //vamos coloca-la no topo
-        table.setFillParent(true); //a table é do tamanho do stage
+        Table table = new Table();
+        table.top();
+        table.setFillParent(true);
 
         //define our labels using the String, and a Label style consisting of a font and color
         countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE)); // Número de digitos, tipo de fonte e cor
         scoreLabel = new Label(String.format("%03d", Luke.score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         healthLabel = new Label(String.format("%03d", Luke.health), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        timeLabel = new Label("Time:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        levelLabel = new Label("1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        worldLabel = new Label("Level:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        lukeLabel = new Label("Score:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        healthPointsLabel = new Label ("Health:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label timeLabel = new Label("Time:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label levelLabel = new Label("1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label worldLabel = new Label("Level:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label lukeLabel = new Label("Score:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label healthPointsLabel = new Label ("Health:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         //add our labels to our table, padding the top, and giving them all equal width with expandX
-        table.add(lukeLabel).expandX().padTop(10); // o expandX partilha o espaço de igual forma no top, caso existam outras labels..
+        table.add(lukeLabel).expandX().padTop(10);
         table.add(scoreLabel).expandX().padTop(10);
         table.add(healthPointsLabel).expandX().padTop(10);
         table.add(healthLabel).expandX().padTop(10);
@@ -66,7 +60,7 @@ public class Hud implements Disposable {
         table.add(countdownLabel).expandX().padTop(10);
 
         //adicionamos a nossa table ao stage
-        stage.addActor(table); //Adicionamos a table ao nosso stage
+        stage.addActor(table);
 
     }
 

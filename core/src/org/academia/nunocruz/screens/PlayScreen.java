@@ -33,7 +33,6 @@ public class PlayScreen implements Screen{
     private Hud hud;
 
     //Tiled map variables
-    private TmxMapLoader maploader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
 
@@ -42,13 +41,9 @@ public class PlayScreen implements Screen{
     private Box2DDebugRenderer b2dr;
     private B2dWorld creator;
 
-    ////
-    GameOverScreen gameOverScreen;
     FinishScreen finishScreen;
 
     public static boolean victory;
-
-    private Sound gameOverSound;
 
     //Sprites
     public Luke luke;
@@ -66,15 +61,10 @@ public class PlayScreen implements Screen{
         //create a FitViewport to maintain virtual aspect ratio despite screen size
         gamePort = new FitViewport(StarWars.V_WIDTH / StarWars.PPM, StarWars.V_HEIGHT / StarWars.PPM, gamecam);
 
-
-
-        //////
-        gameOverScreen = new GameOverScreen(game);
-
         finishScreen = new FinishScreen(game);
 
         //Load our map and setup our map renderer
-        maploader = new TmxMapLoader();
+        TmxMapLoader maploader = new TmxMapLoader();
         map = maploader.load("Mapa/um.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1  / StarWars.PPM);
 
@@ -130,8 +120,6 @@ public class PlayScreen implements Screen{
              if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && luke.b2body.getLinearVelocity().x >= -2)
                  luke.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), luke.b2body.getWorldCenter(), true);
 
-             if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
-                 luke.lukeIsKilling = true;
 
          }
     }
@@ -180,9 +168,6 @@ public class PlayScreen implements Screen{
         //render our game map
         renderer.render();
 
-        //renderer our Box2DDebugLines
-        //b2dr.render(world, gamecam.combined);
-
         game.batch.setProjectionMatrix(gamecam.combined);
 
         game.batch.begin();
@@ -223,7 +208,7 @@ public class PlayScreen implements Screen{
 
             StarWars.music.stop();
 
-            gameOverSound = StarWars.manager.get("audio/sounds/gameover.wav");
+            Sound gameOverSound = StarWars.manager.get("audio/sounds/gameover.wav");
             gameOverSound.play();
 
             return true;

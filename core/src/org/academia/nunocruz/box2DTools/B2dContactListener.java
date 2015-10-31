@@ -7,7 +7,7 @@ import org.academia.nunocruz.gameObjects.Luke;
 import org.academia.nunocruz.gameObjects.TileObjects.EnergyGlobe;
 import org.academia.nunocruz.gameObjects.TileObjects.SpaceShip;
 import org.academia.nunocruz.gameObjects.TileObjects.Yoda;
-import org.academia.nunocruz.gameObjects.Weapon;
+
 
 public class B2dContactListener implements ContactListener {
 
@@ -31,15 +31,6 @@ public class B2dContactListener implements ContactListener {
                 }
                 break;
 
-            case StarWars.LIGHTSABER_BIT | StarWars.ENEMY_BIT:
-
-                if (fixA.getFilterData().categoryBits == StarWars.ENEMY_BIT) {
-                    ((Enemy) fixA.getUserData()).hit(((Weapon) fixB.getUserData()).damage);
-
-                } else {
-                    ((Enemy) fixB.getUserData()).hit(((Weapon) fixA.getUserData()).damage);
-                }
-                break;
 
             case StarWars.LUKE_BIT | StarWars.ENERGYGLOBE_BIT:
 

@@ -8,8 +8,6 @@ import org.academia.nunocruz.screens.PlayScreen;
 
 public class SpaceShip extends TileObject {
 
-    private Sound victorySound;
-
     public SpaceShip(PlayScreen screen, Rectangle bounds) {
 
         super(screen, bounds);
@@ -20,10 +18,9 @@ public class SpaceShip extends TileObject {
     @Override
     public void onHit() {
         Luke.gainScore(50);
-        victorySound = StarWars.manager.get("audio/sounds/victorySound.mp3");
+        Sound victorySound = StarWars.manager.get("audio/sounds/victorySound.mp3");
         victorySound.play();
         PlayScreen.victory=true;
-
 
     }
 }

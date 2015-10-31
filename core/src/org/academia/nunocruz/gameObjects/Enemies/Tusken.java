@@ -14,9 +14,6 @@ public class Tusken extends Enemy {
 
     private float stateTime;
     private Animation walkAnimation;
-    private Array<TextureRegion> tuskens;
-    private boolean runningRight;
-
 
     /** Ana: Defining the hit method */
 
@@ -27,7 +24,7 @@ public class Tusken extends Enemy {
         damage = 2;
         score = 10;
 
-        tuskens = new Array<TextureRegion>();
+        Array<TextureRegion> tuskens = new Array<TextureRegion>();
 
         for (int i = 0; i < 3; i++) {
             tuskens.add(new TextureRegion(screen.getAtlas().findRegion("tusken-rideres"), i * 32, 0, 32, 32));

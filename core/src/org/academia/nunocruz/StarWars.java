@@ -37,11 +37,7 @@ public class StarWars extends Game {
 		batch = new SpriteBatch();
 		manager = new AssetManager();
 		manager.load("audio/music/gameMusic.wav", Music.class);
-		//manager.load("audio/music/cantina.wav", Music.class);
-		//manager.load("audio/sounds/catchEnergy.wav", Sound.class);
 		manager.load("audio/sounds/gameover.wav", Sound.class);
-		//manager.load("audio/sounds/Lightsaber Turn On.wav", Sound.class);
-		//manager.load("audio/sounds/monster_creature_grunt-1.mp3", Sound.class);
 		manager.load("audio/sounds/nave-endgame.wav", Sound.class);
 		manager.load("audio/sounds/victorySound.mp3", Sound.class);
 		manager.finishLoading();

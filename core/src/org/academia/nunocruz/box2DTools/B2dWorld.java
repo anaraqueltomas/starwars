@@ -19,15 +19,11 @@ public class B2dWorld {
 
     private Array<Tusken> tuskens;
     private Array<Jawa> jawas;
-    private Array<SpaceShip> spaceShips;
-    private Array<Yoda> yodas;
 
     public B2dWorld(PlayScreen screen) {
 
         World world = screen.getWorld();
         TiledMap map = screen.getMap();
-
-        //create body and fixture variables
 
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
@@ -86,14 +82,14 @@ public class B2dWorld {
         }
 
         //create SpaceShips;
-        spaceShips = new Array<SpaceShip>();
+        Array<SpaceShip> spaceShips = new Array<SpaceShip>();
         for (MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             new SpaceShip(screen, rect);
         }
 
         //create yodas;
-        yodas = new Array<Yoda>();
+        Array<Yoda> yodas = new Array<Yoda>();
         for (MapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             new Yoda(screen, rect);
