@@ -5,7 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import org.academia.nunocruz.screens.PlayScreen;
+import org.academia.nunocruz.screens.HomeScreen;
 
 public class StarWars extends Game {
 
@@ -43,7 +43,7 @@ public class StarWars extends Game {
 		manager.load("audio/sounds/gameover.wav", Sound.class);
 		manager.finishLoading();
 
-		setScreen(new PlayScreen(this));
+		setScreen(new HomeScreen(this));
 	}
 
 	@Override

@@ -11,20 +11,22 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academia.nunocruz.StarWars;
 
-public class GameOverScreen implements Screen{
+/**
+ * Created by raqueldoria on 31/10/15.
+ */
+public class FinishScreen implements Screen {
 
     private Viewport viewport;
     private Stage stage;
     private Game game;
     private Texture img;
 
-    public GameOverScreen(Game game){
-
+    public FinishScreen(Game game) {
         this.game = game;
         viewport = new FitViewport(StarWars.V_WIDTH, StarWars.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((StarWars) game).batch);
 
-        img = new Texture(Gdx.files.internal("gameOver.png"));
+        img = new Texture(Gdx.files.internal("winnerScreen.png"));
     }
 
     @Override
@@ -70,6 +72,6 @@ public class GameOverScreen implements Screen{
 
     @Override
     public void dispose() {
-        stage.dispose();
+
     }
 }

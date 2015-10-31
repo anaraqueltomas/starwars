@@ -3,11 +3,9 @@ package org.academia.nunocruz.gameObjects;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import org.academia.nunocruz.StarWars;
-import org.academia.nunocruz.screens.Hud;
 import org.academia.nunocruz.screens.PlayScreen;
 
 public class Luke extends Sprite {
@@ -24,8 +22,11 @@ public class Luke extends Sprite {
     private float stateTimer;
     private boolean runningRight;
     private boolean lukeIsDead;
+<<<<<<< HEAD
     public static int health = 20;
     public static int score = 0;
+=======
+>>>>>>> 2a81dcfeff8590397ec355e45800bd47624b216b
 
 
     public Luke(PlayScreen screen){
@@ -169,6 +170,7 @@ public class Luke extends Sprite {
         if (health <= 0) { lukeIsDead = true; }
     }
 
+<<<<<<< HEAD
     public static void gainScore(int n) {
         score += n;
         Hud.setScoreLabel();
@@ -176,6 +178,12 @@ public class Luke extends Sprite {
     public static void gainHealth(int n) {
         health += n;
         Hud.setHealthLabel();
+=======
+        StarWars.manager.get("audio/music/gameMusic.wav", Music.class).stop();
+        StarWars.manager.get("audio/sounds/gameover.wav", Sound.class).play();
+        lukeIsDead = true;
+
+>>>>>>> 2a81dcfeff8590397ec355e45800bd47624b216b
     }
 
     public boolean isDead(){
@@ -186,12 +194,13 @@ public class Luke extends Sprite {
         return stateTimer;
     }
 
+<<<<<<< HEAD
     public void setCurrentState(State currentState) {
         this.currentState = currentState;
     }
 
     public void jump() {
-        b2body.applyLinearImpulse(new Vector2(0, 5f), b2body.getWorldCenter(), true);
+        b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
         currentState = State.JUMPING;
     }
 
@@ -205,4 +214,6 @@ public class Luke extends Sprite {
 
 
 
+=======
+>>>>>>> 2a81dcfeff8590397ec355e45800bd47624b216b
 }

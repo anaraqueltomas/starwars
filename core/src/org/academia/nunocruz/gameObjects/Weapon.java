@@ -9,16 +9,18 @@ import org.academia.nunocruz.StarWars;
 /**
  *  Ana
  */
-public class Lightsaber extends Sprite {
+public class Weapon extends Sprite {
 
     public int damage = 3;
+
+
 
     public void defineLightsaber(){
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(64/ StarWars.PPM,64/ StarWars.PPM);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-    //    b2body = world.createBody(bodyDef);
+        //b2body = world.createBody(bodyDef);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.filter.categoryBits = StarWars.LIGHTSABER_BIT;
@@ -29,7 +31,7 @@ public class Lightsaber extends Sprite {
 
         fixtureDef.shape = shape;
 
-    //    b2body.createFixture(fixtureDef).setUserData(this);
+        //b2body.createFixture(fixtureDef).setUserData(this);
     }
 
 

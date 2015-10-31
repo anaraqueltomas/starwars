@@ -24,6 +24,7 @@ public class Tusken extends Enemy {
 
         health = 10;
         damage = 2;
+        score = 10;
 
         frames = new Array<TextureRegion>();
 
