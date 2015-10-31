@@ -15,10 +15,10 @@ import org.academia.nunocruz.screens.PlayScreen;
  */
 public class Jawa extends Enemy{
 
-
     private float stateTime;
     private Animation walkAnimation;
     private Array<TextureRegion> jawaWalk;
+    private boolean runningRight;
 
 
     public Jawa(PlayScreen screen, float x, float y) {
@@ -30,7 +30,7 @@ public class Jawa extends Enemy{
 
         jawaWalk = new Array<TextureRegion>();
 
-        for(int i=0; i<3; i++) {
+        for(int i = 0; i < 3; i++) {
             jawaWalk.add(new TextureRegion(screen.getAtlas().findRegion("jawa"), i * 32, 0, 32, 32));
         }
 
@@ -55,6 +55,19 @@ public class Jawa extends Enemy{
             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
             setRegion(walkAnimation.getKeyFrame(stateTime, true));
         }
+    }
+
+    public TextureRegion getFrame (float delta){
+        TextureRegion region = null;
+
+        if((b2body.getLinearVelocity().x<0 || !runningRight) && !region.isFlipX()){
+            region.flip(true,false);
+            runningRight = false;
+        } else if((b2body.getLinearVelocity().x>0 || runningRight)&& region.isFlipX()){
+            region.flip(true,false);
+            runningRight = true;
+        }
+        return region;
     }
 
 

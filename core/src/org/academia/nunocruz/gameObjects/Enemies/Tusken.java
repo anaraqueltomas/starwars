@@ -14,7 +14,8 @@ public class Tusken extends Enemy {
 
     private float stateTime;
     private Animation walkAnimation;
-    private Array<TextureRegion> frames;
+    private Array<TextureRegion> tuskenWalk;
+    private boolean runningRight;
 
 
     /** Ana: Defining the hit method */
@@ -26,13 +27,13 @@ public class Tusken extends Enemy {
         damage = 2;
         score = 10;
 
-        frames = new Array<TextureRegion>();
+        tuskenWalk = new Array<TextureRegion>();
 
         for(int i = 21; i < 24; i++) {
-            frames.add(new TextureRegion(screen.getAtlas().findRegion("tusken-rideres"), i * 32, 0, 32, 32));
+            tuskenWalk.add(new TextureRegion(screen.getAtlas().findRegion("tusken-rideres"), i * 32, 0, 32, 32));
         }
 
-        walkAnimation = new Animation(0.4f, frames);
+        walkAnimation = new Animation(0.4f, tuskenWalk);
         setBounds(getX(), getY(), 32 / StarWars.PPM, 32 / StarWars.PPM);
         setToDestroy = false;
         destroyed = false;
@@ -54,6 +55,18 @@ public class Tusken extends Enemy {
         }
     }
 
+    public TextureRegion getFrame (float delta){
+        TextureRegion region = null;
+
+        if((b2body.getLinearVelocity().x<0 || !runningRight) && !region.isFlipX()){
+            region.flip(true, false);
+            runningRight = false;
+        } else if((b2body.getLinearVelocity().x>0 || runningRight)&& region.isFlipX()){
+            region.flip(true, false);
+            runningRight = true;
+        }
+        return region;
+    }
 
     @Override
     protected void defineEnemy() {

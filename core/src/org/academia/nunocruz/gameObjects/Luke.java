@@ -154,6 +154,7 @@ public class Luke extends Sprite {
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(8/StarWars.PPM,16/StarWars.PPM);
+
         fixtureDef.filter.categoryBits = StarWars.LUKE_BIT;
         fixtureDef.filter.maskBits = StarWars.GROUND_BIT | StarWars.ENERGYGLOBE_BIT | StarWars.BRICK_BIT|
                 StarWars.ENEMY_BIT| StarWars.OBJECT_BIT;
