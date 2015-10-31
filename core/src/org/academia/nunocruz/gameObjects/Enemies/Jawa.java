@@ -11,9 +11,9 @@ import org.academia.nunocruz.StarWars;
 import org.academia.nunocruz.screens.PlayScreen;
 
 /**
- *  Ana
+ * Ana
  */
-public class Jawa extends Enemy{
+public class Jawa extends Enemy {
 
     private float stateTime;
     private Animation walkAnimation;
@@ -42,22 +42,20 @@ public class Jawa extends Enemy{
         }
     }
 
-    public void update(float dt){
+    public void update(float dt) {
 
         stateTime += dt;
-        if(setToDestroy && !destroyed){
+        if (setToDestroy && !destroyed) {
             world.destroyBody(b2body);
             destroyed = true;
             setRegion(new TextureRegion(screen.getAtlas().findRegion("jawa"), 32, 0, 32, 32));
             stateTime = 0;
-        }
-        else if(!destroyed) {
+        } else if (!destroyed) {
             b2body.setLinearVelocity(velocity);
             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
             setRegion(walkAnimation.getKeyFrame(stateTime, true));
         }
     }
-
 
 
     @Override
@@ -70,7 +68,7 @@ public class Jawa extends Enemy{
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(8 / StarWars.PPM, 16/StarWars.PPM);
+        shape.setAsBox(8 / StarWars.PPM, 16 / StarWars.PPM);
 
         fdef.filter.categoryBits = StarWars.ENEMY_BIT;
         fdef.filter.maskBits = StarWars.GROUND_BIT | StarWars.ENERGYGLOBE_BIT | StarWars.BRICK_BIT |
@@ -80,12 +78,9 @@ public class Jawa extends Enemy{
         b2body.createFixture(fdef).setUserData(this);
     }
 
-    public void draw(Batch batch){
+    public void draw(Batch batch) {
 
-        if(!destroyed || stateTime < 1)
+        if (!destroyed || stateTime < 1)
             super.draw(batch);
     }
-
-
-
 }

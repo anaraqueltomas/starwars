@@ -18,7 +18,6 @@ public class Tusken extends Enemy {
     private boolean runningRight;
 
 
-
     /** Ana: Defining the hit method */
 
     public Tusken(PlayScreen screen, float x, float y) {
@@ -30,10 +29,9 @@ public class Tusken extends Enemy {
 
         tuskens = new Array<TextureRegion>();
 
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             tuskens.add(new TextureRegion(screen.getAtlas().findRegion("tusken-rideres"), i * 32, 0, 32, 32));
-        }
-
+            
         walkAnimation = new Animation(0.4f, tuskens);
 
         setBounds(getX(), getY(), 32 / StarWars.PPM, 32 / StarWars.PPM);
