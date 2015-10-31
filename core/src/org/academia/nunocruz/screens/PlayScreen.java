@@ -43,6 +43,9 @@ public class PlayScreen implements Screen{
     private Box2DDebugRenderer b2dr;
     private B2dWorld creator;
 
+    ////
+    GameOverScreen gameOverScreen;
+
     //Sprites
     private Luke player;
 
@@ -63,6 +66,9 @@ public class PlayScreen implements Screen{
 
         //create our game HUD for scores/timers/level info
         hud = new Hud(game.batch);
+
+        //////
+        gameOverScreen = new GameOverScreen(game);
 
         //Load our map and setup our map renderer
         maploader = new TmxMapLoader();
