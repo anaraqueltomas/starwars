@@ -137,10 +137,10 @@ public class PlayScreen implements Screen{
 
         luke.update(dt);
 
-        // Os inimigos só "acordam" quando estamos a menos de 224 metros deles;
+        // Os inimigos só "acordam" quando estamos a menos de 260 metros deles;
         for(Enemy enemy : creator.getEnemies()) {
             enemy.update(dt);
-            if(enemy.getX() < luke.getX() + 224 / StarWars.PPM) {
+            if(enemy.getX() < luke.getX() + 260 / StarWars.PPM) {
                 enemy.b2body.setActive(true);
             }
         }

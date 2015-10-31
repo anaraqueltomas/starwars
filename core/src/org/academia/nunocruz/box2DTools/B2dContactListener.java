@@ -42,8 +42,10 @@ public class B2dContactListener implements ContactListener {
             case StarWars.ENEMY_BIT | StarWars.ENEMY_BIT:
 
                 //Se existir contacto entre dois inimigos, altera o sentido da deslocação dos mesmos;
+
                 ((Enemy)fixA.getUserData()).reverseVelocity(true, false);
                 ((Enemy)fixB.getUserData()).reverseVelocity(true, false);
+
                 break;
 
             case StarWars.LIGHTSABER_BIT | StarWars.ENEMY_BIT:

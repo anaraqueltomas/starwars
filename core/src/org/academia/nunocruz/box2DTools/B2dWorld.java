@@ -1,23 +1,22 @@
 package org.academia.nunocruz.box2DTools;
 
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import org.academia.nunocruz.StarWars;
 import org.academia.nunocruz.gameObjects.Enemies.Enemy;
+import org.academia.nunocruz.gameObjects.Enemies.Jawa;
 import org.academia.nunocruz.gameObjects.Enemies.Tusken;
-import org.academia.nunocruz.gameObjects.TileObjects.Brick;
 import org.academia.nunocruz.gameObjects.TileObjects.EnergyGlobe;
 import org.academia.nunocruz.screens.PlayScreen;
 
 public class B2dWorld {
 
     private Array<Tusken> tuskens;
+    private Array<Jawa> jawas;
 
     public B2dWorld(PlayScreen screen){
 
@@ -32,7 +31,7 @@ public class B2dWorld {
         Body body;
 
         //create ground bodies/fixtures
-        for(MapObject object : map.getLayers().get(1).getObjects().getByType(RectangleMapObject.class)){
+        for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
@@ -46,44 +45,49 @@ public class B2dWorld {
         }
 
         //create plataform bodies/fixtures
-        for(MapObject object : map.getLayers().get(2).getObjects().getByType(PolygonMapObject.class)){
-            Polygon polygon = ((PolygonMapObject) object).getPolygon();
+        for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((polygon.getX() + polygon.getBoundingRectangle().getWidth() / 2) / StarWars.PPM, (polygon.getY() + polygon.getBoundingRectangle().getHeight() / 2) / StarWars.PPM);
+            bdef.position.set((rectangle.getX() + rectangle.getWidth() / 2) / StarWars.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / StarWars.PPM);
 
             body = world.createBody(bdef);
 
-            shape.setAsBox(polygon.getBoundingRectangle().getWidth() / 2 / StarWars.PPM, polygon.getBoundingRectangle().getHeight() / 2 / StarWars.PPM);
+            shape.setAsBox(rectangle.getWidth() / 2 / StarWars.PPM, rectangle.getHeight() / 2 / StarWars.PPM);
             fdef.shape = shape;
             fdef.filter.categoryBits = StarWars.OBJECT_BIT;
             body.createFixture(fdef);
         }
 
-        //create jawas bodies/fixtures
+        //create energy bodies/fixtures
         for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
-            new Brick(screen, object);
+            new EnergyGlobe(screen, object);
         }
 
-        //create energy bodies/fixtures
-        for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
-            new EnergyGlobe(screen, object);
+        //create all jawas;
+        jawas = new Array<Jawa>();
+        for(MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            jawas.add(new Jawa(screen, rect.getX() / StarWars.PPM, rect.getY() / StarWars.PPM));
         }
 
         //create all tuskens;
         tuskens = new Array<Tusken>();
-        for(MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
+        for(MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             tuskens.add(new Tusken(screen, rect.getX() / StarWars.PPM, rect.getY() / StarWars.PPM));
         }
+
     }
 
     public Array<Tusken> getTuskens() {
         return tuskens;
     }
+
     public Array<Enemy> getEnemies(){
         Array<Enemy> enemies = new Array<Enemy>();
         enemies.addAll(tuskens);
+        enemies.addAll(jawas);
         return enemies;
     }
 }

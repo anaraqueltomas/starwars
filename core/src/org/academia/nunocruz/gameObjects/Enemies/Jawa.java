@@ -30,8 +30,8 @@ public class Jawa extends Enemy{
 
         jawaWalk = new Array<TextureRegion>();
 
-        for(int i=0; i<3; i++) {
-            jawaWalk.add(new TextureRegion(screen.getAtlas().findRegion("jawa"), i * 32, 0, 32, 32));
+        for(int i=0; i<2; i++) {
+            jawaWalk.add(new TextureRegion(screen.getAtlas().findRegion("jawa"), i * 32, 0 , 32, 32));
         }
 
         walkAnimation = new Animation(0.4f, jawaWalk);
