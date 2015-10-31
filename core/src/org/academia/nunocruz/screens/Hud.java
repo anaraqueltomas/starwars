@@ -53,16 +53,18 @@ public class Hud implements Disposable {
         levelLabel = new Label("1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         worldLabel = new Label("Level:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         lukeLabel = new Label("Score:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        healthPointsLabel = new Label ("Energy:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        healthPointsLabel = new Label ("Health:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
 
         //add our labels to our table, padding the top, and giving them all equal width with expandX
         table.add(lukeLabel).expandX().padTop(10); // o expandX partilha o espaço de igual forma no top, caso existam outras labels..
+        table.add(scoreLabel).expandX().padTop(10);
+        table.add(healthPointsLabel).expandX().padTop(10);
+        table.add(healthLabel).expandX().padTop(10);
         table.add(worldLabel).expandX().padTop(10);
+        table.add(levelLabel).expandX().padTop(10);
         table.add(timeLabel).expandX().padTop(10);
-        table.row(); //criamos uma nova linha para a nossa table
-        table.add(scoreLabel).expandX();
-        table.add(levelLabel).expandX();
-        table.add(countdownLabel).expandX();
+        table.add(countdownLabel).expandX().padTop(10);
 
         //adicionamos a nossa table ao stage
         stage.addActor(table); //Adicionamos a table ao nosso stage

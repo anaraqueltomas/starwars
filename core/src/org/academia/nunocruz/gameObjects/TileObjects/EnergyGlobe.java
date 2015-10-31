@@ -5,9 +5,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import org.academia.nunocruz.StarWars;
 import org.academia.nunocruz.screens.PlayScreen;
 
-/**
- * Created by nunocruz on 29/10/15.
- */
+
 public class EnergyGlobe extends TileObject {
 
     private static TiledMapTileSet tileSet;

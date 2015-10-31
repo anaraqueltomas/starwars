@@ -1,7 +1,5 @@
 package org.academia.nunocruz.gameObjects.Enemies;
 
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -20,7 +18,7 @@ public class Jawa extends Enemy{
 
     private float stateTime;
     private Animation walkAnimation;
-    private Array<TextureRegion> frames;
+    private Array<TextureRegion> jawaWalk;
 
 
     public Jawa(PlayScreen screen, float x, float y) {
@@ -30,14 +28,15 @@ public class Jawa extends Enemy{
         damage = 1;
         score = 5;
 
-        frames = new Array<TextureRegion>();
+        jawaWalk = new Array<TextureRegion>();
 
-        for(int i = 21; i < 24; i++) {
-            frames.add(new TextureRegion(screen.getAtlas().findRegion("jawa"), i * 32, 0, 32, 32));
+        for(int i=0; i<3; i++) {
+            jawaWalk.add(new TextureRegion(screen.getAtlas().findRegion("jawa"), i * 32, 0, 32, 32));
         }
 
-        walkAnimation = new Animation(0.4f, frames);
-        setBounds(getX(), getY(), 32 / StarWars.PPM, 32 / StarWars.PPM);
+        walkAnimation = new Animation(0.4f, jawaWalk);
+        stateTime = 0;
+        setBounds(getX(), getY(), 32/ StarWars.PPM, 32 /StarWars.PPM);
         setToDestroy = false;
         destroyed = false;
     }
