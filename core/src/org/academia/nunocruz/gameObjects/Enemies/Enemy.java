@@ -1,9 +1,13 @@
 package org.academia.nunocruz.gameObjects.Enemies;
 
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import org.academia.nunocruz.StarWars;
+import org.academia.nunocruz.gameObjects.Luke;
 import org.academia.nunocruz.screens.PlayScreen;
 
 /**
@@ -15,6 +19,13 @@ public abstract class Enemy extends Sprite {
     protected PlayScreen screen;
     public Body b2body;
     public Vector2 velocity;
+
+    boolean setToDestroy;
+    boolean destroyed;
+
+    public int health;
+    public int damage;
+    public int score;
 
     public Enemy(PlayScreen screen, float x, float y){
 
@@ -35,6 +46,17 @@ public abstract class Enemy extends Sprite {
             velocity.x = -velocity.x;
         if(y)
             velocity.y = -velocity.y;
+    }
+
+    /** Ana: defining hit method */
+    public void hit(int n) {
+
+        health -= n;
+        if (health <= 0) {
+            setToDestroy = true;
+            Luke.gainScore(score);
+        }
+
     }
 }
 

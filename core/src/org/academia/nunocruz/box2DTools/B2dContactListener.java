@@ -3,7 +3,9 @@ package org.academia.nunocruz.box2DTools;
 import com.badlogic.gdx.physics.box2d.*;
 import org.academia.nunocruz.StarWars;
 import org.academia.nunocruz.gameObjects.Enemies.Enemy;
+import org.academia.nunocruz.gameObjects.Weapon;
 import org.academia.nunocruz.gameObjects.Luke;
+import org.academia.nunocruz.gameObjects.TileObjects.EnergyGlobe;
 
 public class B2dContactListener implements ContactListener {
 
@@ -30,10 +32,10 @@ public class B2dContactListener implements ContactListener {
 
                 //Se a fixA for o Luke chama o metodo hit, se não chama o metodo na fixtureB;
                 if(fixA.getFilterData().categoryBits == StarWars.LUKE_BIT) {
-                    ((Luke)fixA.getUserData()).hit();
+                    ((Luke)fixA.getUserData()).hit(((Enemy)fixB.getUserData()).damage);
                 }
                 else {
-                    ((Luke)fixB.getUserData()).hit();
+                    ((Luke)fixB.getUserData()).hit(((Enemy)fixA.getUserData()).damage);
                 }
                 break;
 
@@ -43,6 +45,31 @@ public class B2dContactListener implements ContactListener {
                 ((Enemy)fixA.getUserData()).reverseVelocity(true, false);
                 ((Enemy)fixB.getUserData()).reverseVelocity(true, false);
                 break;
+
+            case StarWars.LIGHTSABER_BIT | StarWars.ENEMY_BIT:
+
+                if(fixA.getFilterData().categoryBits == StarWars.ENEMY_BIT) {
+                    ((Enemy)fixA.getUserData()).hit(((Weapon) fixB.getUserData()).damage);
+
+                }
+                else {
+                    ((Enemy)fixB.getUserData()).hit(((Weapon)fixA.getUserData()).damage);
+                }
+                break;
+
+            case StarWars.LUKE_BIT | StarWars.ENERGYGLOBE_BIT:
+
+                if(fixA.getFilterData().categoryBits == StarWars.LUKE_BIT) {
+                    ((Luke)fixA.getUserData()).gainHealth(((EnergyGlobe)fixB.getUserData()).health);
+                    ((Luke)fixA.getUserData()).gainScore(((EnergyGlobe)fixB.getUserData()).score);
+                }
+                else {
+                    ((Luke)fixB.getUserData()).gainHealth(((EnergyGlobe)fixA.getUserData()).health);
+                    ((Luke)fixB.getUserData()).gainScore(((EnergyGlobe)fixA.getUserData()).score);
+
+                }
+                break;
+
         }
     }
 

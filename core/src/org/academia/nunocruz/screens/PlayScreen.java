@@ -72,7 +72,7 @@ public class PlayScreen implements Screen{
 
         //Load our map and setup our map renderer
         maploader = new TmxMapLoader();
-        map = maploader.load("teste.tmx");
+        map = maploader.load("Mapa/starwars.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1  / StarWars.PPM);
 
         //initially set our gamecam to be centered correctly at the start of of map
@@ -192,7 +192,8 @@ public class PlayScreen implements Screen{
 
     public boolean gameOver(){
 
-        if(player.currentState == Luke.State.DEAD && player.getStateTimer() > 1){
+        if(luke.currentState == Luke.State.DEAD && luke.getStateTimer() > 1
+           || Hud.getWorldTimer() <= 0 /* && luke.getStateTimer() > 1 */ || luke.b2body.getPosition().y < 0 ) {
             return true;
         }
         return false;

@@ -19,9 +19,8 @@ public class Hud implements Disposable {
     private Viewport viewport;
 
     //Luke score/time Tracking Variables
-    private Integer worldTimer;
-    private float timeCount;
-    private static Integer score;
+    private static Integer worldTimer = 300;
+    private float timeCount = 0;
 
     //Scene2D widgets
     private Label countdownLabel;
@@ -33,10 +32,6 @@ public class Hud implements Disposable {
 
     public Hud(SpriteBatch sb){
 
-        //Definimos as nossas tracking variables
-        worldTimer =300;
-        timeCount = 0;
-        score = 0;
 
         //setup the HUD viewport using a new camera seperate from our gamecam
         //define our stage using that viewport and our games spritebatch
@@ -78,9 +73,17 @@ public class Hud implements Disposable {
         }
     }
 
-    public static void addScore(int value){
-        score += value;
-        scoreLabel.setText(String.format("%06d", score));
+    public static void setHealthLabel(){
+        energyLabel.setText(String.format("%3d", Luke.health));
+    }
+
+    public static void setScoreLabel() {
+        scoreLabel.setText(String.format("%06d", Luke.score));
+    }
+
+
+    public static Integer getWorldTimer() {
+        return worldTimer;
     }
 
     @Override

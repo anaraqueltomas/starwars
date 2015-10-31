@@ -1,7 +1,5 @@
 package org.academia.nunocruz.gameObjects;
 
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -24,6 +22,9 @@ public class Luke extends Sprite {
     private float stateTimer;
     private boolean runningRight;
     private boolean lukeIsDead;
+    public static int health = 20;
+    public static int score = 0;
+
 
     public Luke(PlayScreen screen){
 
@@ -34,30 +35,30 @@ public class Luke extends Sprite {
         stateTimer = 0;
         runningRight = true;
 
-        Array<TextureRegion> frames = new Array<TextureRegion>();
+        Array<TextureRegion> lukeStand = new Array<TextureRegion>();
 
         //get run animation frames and add them to lukeRun Animation
-        for(int i=0; i<3; i++){
-            frames.add(new TextureRegion(getTexture(), i*32, 0, 32, 32));
+        for(int i=9; i<12; i++){
+            lukeStand.add(new TextureRegion(getTexture(), (i * 32)+4, 70, 32, 32));
         }
-        lukeRun = new Animation(0.1f, frames);
-        frames.clear();
+        lukeRun = new Animation(0.1f, lukeStand);
+        lukeStand.clear();
 
         //get jump animation frames and add them to lukeJump Animation
-        for(int i = 0; i < 4; i++){
-            frames.add(new TextureRegion(getTexture(), i*32, 0, 32, 32));
+        for(int i = 9; i < 12; i++){
+            lukeStand.add(new TextureRegion(getTexture(), (i * 32)+4, 70, 32, 32));
         }
-        lukeJump = new Animation(0.1f, frames);
+        lukeJump = new Animation(0.1f, lukeStand);
 
         //create texture region for luke standing
-        lukeStand = new TextureRegion(getTexture(),256,64,32,32);
+        this.lukeStand = new TextureRegion(getTexture(),324,70,32,32);
 
         //define mario in Box2d
         defineLuke();
 
         //set initial values for luke location, width and height. And initial frame as lukeStand.
         setBounds(0,0,32/ StarWars.PPM,32 / StarWars.PPM);
-        setRegion(lukeStand);
+        setRegion(this.lukeStand);
 
     }
 
@@ -142,11 +143,13 @@ public class Luke extends Sprite {
 
     public void defineLuke(){
 
+        // lightsaber  = Kinematic Body
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(64/ StarWars.PPM,64/ StarWars.PPM);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bodyDef);
 
+        //
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(8/StarWars.PPM,16/StarWars.PPM);
@@ -158,12 +161,19 @@ public class Luke extends Sprite {
         b2body.createFixture(fixtureDef).setUserData(this);
     }
 
-    public void hit(){
+    public void hit(int n){
+        health -= n;
+        Hud.setHealthLabel();
+        if (health <= 0) { lukeIsDead = true; }
+    }
 
-        StarWars.manager.get("audio/music/gameMusic.wav", Music.class).stop();
-        StarWars.manager.get("audio/sounds/gameover.wav", Sound.class).play();
-        lukeIsDead = true;
-
+    public static void gainScore(int n) {
+        score += n;
+        Hud.setScoreLabel();
+    }
+    public static void gainHealth(int n) {
+        health += n;
+        Hud.setHealthLabel();
     }
 
     public boolean isDead(){
@@ -173,5 +183,24 @@ public class Luke extends Sprite {
     public float getStateTimer(){
         return stateTimer;
     }
+
+    public void setCurrentState(State currentState) {
+        this.currentState = currentState;
+    }
+
+    public void jump() {
+        b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
+        currentState = State.JUMPING;
+    }
+
+    public void becomeJedi() {
+
+        // something else................
+
+        score += 20;
+        Hud.setScoreLabel();
+    }
+
+
 
 }
