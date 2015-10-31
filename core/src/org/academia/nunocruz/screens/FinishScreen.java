@@ -12,21 +12,21 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academia.nunocruz.StarWars;
 
 /**
- * Created by raqueldoria on 30/10/15.
+ * Created by raqueldoria on 31/10/15.
  */
-public class HomeScreen implements Screen {
+public class FinishScreen implements Screen {
 
     private Viewport viewport;
     private Stage stage;
     private Game game;
     private Texture img;
 
-    public HomeScreen(Game game) {
+    public FinishScreen(Game game) {
         this.game = game;
         viewport = new FitViewport(StarWars.V_WIDTH, StarWars.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((StarWars) game).batch);
 
-        img = new Texture(Gdx.files.internal("introScreen.png"));
+        img = new Texture(Gdx.files.internal("winnerScreen.png"));
     }
 
     @Override
@@ -36,18 +36,18 @@ public class HomeScreen implements Screen {
 
     @Override
     public void render(float delta) {
-            if(Gdx.input.justTouched()) {
-                game.setScreen(new PlayScreen((StarWars) game));
-                dispose();
-            }
-            Gdx.gl.glClearColor(0, 0, 0, 1);
-            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        if(Gdx.input.justTouched()) {
+            game.setScreen(new PlayScreen((StarWars) game));
+            dispose();
+        }
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-            ((StarWars) game).batch.begin();
-            ((StarWars) game).batch.draw(img, 10, 10);
-            ((StarWars) game).batch.end();
+        ((StarWars) game).batch.begin();
+        ((StarWars) game).batch.draw(img, 10, 10);
+        ((StarWars) game).batch.end();
 
-            stage.draw();
+        stage.draw();
     }
 
     @Override

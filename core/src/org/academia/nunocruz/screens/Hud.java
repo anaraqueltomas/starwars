@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academia.nunocruz.StarWars;
+import org.academia.nunocruz.gameObjects.Luke;
 
 public class Hud implements Disposable {
 
@@ -29,6 +30,8 @@ public class Hud implements Disposable {
     private Label levelLabel;
     private Label worldLabel;
     private Label lukeLabel;
+    private static Label healthLabel;
+    private Label healthPointsLabel;
 
     public Hud(SpriteBatch sb){
 
@@ -44,11 +47,14 @@ public class Hud implements Disposable {
 
         //define our labels using the String, and a Label style consisting of a font and color
         countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE)); // Número de digitos, tipo de fonte e cor
-        scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        timeLabel = new Label("Time", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        worldLabel = new Label("World", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        lukeLabel = new Label("Score", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
+        scoreLabel = new Label(String.format("%03d", Luke.score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        healthLabel = new Label(String.format("%03d", Luke.health), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        timeLabel = new Label("Time:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        levelLabel = new Label("1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        worldLabel = new Label("Level:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        lukeLabel = new Label("Score:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        healthPointsLabel = new Label ("Energy:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         //add our labels to our table, padding the top, and giving them all equal width with expandX
         table.add(lukeLabel).expandX().padTop(10); // o expandX partilha o espaço de igual forma no top, caso existam outras labels..
@@ -74,7 +80,7 @@ public class Hud implements Disposable {
     }
 
     public static void setHealthLabel(){
-        energyLabel.setText(String.format("%3d", Luke.health));
+        healthLabel.setText(String.format("%3d", Luke.health));
     }
 
     public static void setScoreLabel() {

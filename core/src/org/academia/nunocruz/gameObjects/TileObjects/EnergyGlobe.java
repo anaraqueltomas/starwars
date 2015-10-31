@@ -15,7 +15,6 @@ public class EnergyGlobe extends TileObject {
     public int health = 5;
     private int BLANK_ENERGY = 28;
 
-
     public EnergyGlobe(PlayScreen screen, MapObject object){
         super(screen, object);
 

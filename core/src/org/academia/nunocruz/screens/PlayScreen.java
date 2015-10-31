@@ -47,7 +47,7 @@ public class PlayScreen implements Screen{
     GameOverScreen gameOverScreen;
 
     //Sprites
-    private Luke player;
+    private Luke luke;
 
     //Music
     private Music music;
@@ -87,7 +87,7 @@ public class PlayScreen implements Screen{
         creator = new B2dWorld(this);
 
         //create luke in our game world
-        player = new Luke(this);
+        luke = new Luke(this);
 
         world.setContactListener(new B2dContactListener());
 
@@ -109,14 +109,14 @@ public class PlayScreen implements Screen{
 
     public void handleInput(float dt){
 
-        //control our player using immediate impulses
-         if(player.currentState != Luke.State.DEAD) {
+        //control our luke using immediate impulses
+         if(luke.currentState != Luke.State.DEAD) {
              if (Gdx.input.isKeyJustPressed(Input.Keys.UP))
-                 player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
-             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
-                 player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
-             if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2)
-                 player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
+                 luke.b2body.applyLinearImpulse(new Vector2(0, 4f), luke.b2body.getWorldCenter(), true);
+             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && luke.b2body.getLinearVelocity().x <= 2)
+                 luke.b2body.applyLinearImpulse(new Vector2(0.1f, 0), luke.b2body.getWorldCenter(), true);
+             if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && luke.b2body.getLinearVelocity().x >= -2)
+                 luke.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), luke.b2body.getWorldCenter(), true);
 
          }
     }
@@ -128,12 +128,12 @@ public class PlayScreen implements Screen{
         //takes 1 step in the physics simulation(60 times per second)
         world.step(1 / 60f, 6, 2);
 
-        player.update(dt);
+        luke.update(dt);
 
         // Os inimigos só "acordam" quando estamos a menos de 224 metros deles;
         for(Enemy enemy : creator.getEnemies()) {
             enemy.update(dt);
-            if(enemy.getX() < player.getX() + 224 / StarWars.PPM) {
+            if(enemy.getX() < luke.getX() + 224 / StarWars.PPM) {
                 enemy.b2body.setActive(true);
             }
         }
@@ -141,8 +141,8 @@ public class PlayScreen implements Screen{
         hud.update(dt);
 
         //attach our gamecam to our players.x coordinate
-        if(player.currentState != Luke.State.DEAD) {
-            gamecam.position.x = player.b2body.getPosition().x;
+        if(luke.currentState != Luke.State.DEAD) {
+            gamecam.position.x = luke.b2body.getPosition().x;
         }
 
         //update our gamecam with correct coordinates after changes
@@ -171,8 +171,8 @@ public class PlayScreen implements Screen{
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
 
-        //desenha o player
-        player.draw(game.batch);
+        //desenha o luke
+        luke.draw(game.batch);
 
         //desenha os inimigos
         for (Enemy enemy : creator.getEnemies())
