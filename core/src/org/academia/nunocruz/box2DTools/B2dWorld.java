@@ -42,6 +42,7 @@ public class B2dWorld {
             body = world.createBody(bdef);
 
             shape.setAsBox(r.getWidth() / 2 / StarWars.PPM, r.getHeight() / 2 / StarWars.PPM);
+
             fdef.shape = shape;
             body.createFixture(fdef);
         }

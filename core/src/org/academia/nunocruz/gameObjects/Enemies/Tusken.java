@@ -15,8 +15,6 @@ public class Tusken extends Enemy {
     private float stateTime;
     private Animation walkAnimation;
 
-    /** Ana: Defining the beHitBy method */
-
     public Tusken(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 

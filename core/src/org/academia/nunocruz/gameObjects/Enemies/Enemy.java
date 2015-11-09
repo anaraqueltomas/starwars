@@ -22,6 +22,7 @@ public abstract class Enemy extends Sprite {
     protected int damage;
     protected int score;
 
+
     public Enemy(PlayScreen screen, float x, float y) {
 
         this.world = screen.getWorld();

@@ -28,7 +28,5 @@ public class SpaceShip extends TileObject {
         victorySound.play();
         PlayScreen.victory=true;
 
-
-
     }
 }
