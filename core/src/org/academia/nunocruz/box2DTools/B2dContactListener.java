@@ -2,6 +2,7 @@ package org.academia.nunocruz.box2DTools;
 
 import com.badlogic.gdx.physics.box2d.*;
 import org.academia.nunocruz.StarWars;
+import org.academia.nunocruz.gameObjects.Bullet;
 import org.academia.nunocruz.gameObjects.Enemies.Enemy;
 import org.academia.nunocruz.gameObjects.Luke;
 import org.academia.nunocruz.gameObjects.TileObjects.EnergyGlobe;
@@ -61,6 +62,18 @@ public class B2dContactListener implements ContactListener {
                 } else {
                     ((Yoda) fixA.getUserData()).onHit();
                 }
+                break;
+
+            case StarWars.BULLET_BIT | StarWars.ENEMY_BIT:
+                if(fixA.getFilterData().categoryBits == StarWars.BULLET_BIT) {
+                    ((Bullet) fixA.getUserData()).setToDestroy();
+                    ((Enemy) fixB.getUserData()).setToDestroy();
+
+                }
+                else{
+                    ((Bullet) fixB.getUserData()).setToDestroy();
+                    ((Enemy) fixA.getUserData()).setToDestroy();
+            }
                 break;
         }
     }

@@ -42,7 +42,10 @@ public abstract class Enemy extends Sprite {
             setToDestroy = true;
             Luke.gainScore(score);
         }
+    }
 
+    public void setToDestroy(){
+        setToDestroy = true;
     }
 }
 

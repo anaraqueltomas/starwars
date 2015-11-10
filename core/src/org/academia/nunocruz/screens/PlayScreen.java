@@ -76,6 +76,7 @@ public class PlayScreen implements Screen{
 
         //allows for debug lines of our box2d world.
         b2dr = new Box2DDebugRenderer();
+
         luke = new Luke(this);
 
         //create our game HUD for scores/timers/level info
@@ -119,6 +120,8 @@ public class PlayScreen implements Screen{
                  luke.b2body.applyLinearImpulse(new Vector2(0.1f, 0), luke.b2body.getWorldCenter(), true);
              if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && luke.b2body.getLinearVelocity().x >= -2)
                  luke.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), luke.b2body.getWorldCenter(), true);
+             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
+                 luke.fire();
 
 
          }
@@ -167,6 +170,8 @@ public class PlayScreen implements Screen{
 
         //render our game map
         renderer.render();
+
+        b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
 

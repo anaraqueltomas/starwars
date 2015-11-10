@@ -52,7 +52,6 @@ public class Tusken extends Enemy {
         }
     }
 
-
     @Override
     protected void defineEnemy() {
 
@@ -67,7 +66,7 @@ public class Tusken extends Enemy {
 
         fdef.filter.categoryBits = StarWars.ENEMY_BIT;
         fdef.filter.maskBits = StarWars.GROUND_BIT | StarWars.ENERGYGLOBE_BIT | StarWars.BRICK_BIT |
-                StarWars.ENEMY_BIT | StarWars.OBJECT_BIT | StarWars.LUKE_BIT;
+                StarWars.ENEMY_BIT | StarWars.OBJECT_BIT | StarWars.LUKE_BIT | StarWars.BULLET_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

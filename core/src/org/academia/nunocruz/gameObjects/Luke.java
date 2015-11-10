@@ -1,6 +1,7 @@
 package org.academia.nunocruz.gameObjects;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -27,11 +28,14 @@ public class Luke extends Sprite {
     public static int health;
     public static int score;
     public Array<TextureRegion> lukeStandArray = new Array<TextureRegion>();
+    private Array<Bullet> bullets;
+    private PlayScreen screen;
 
 
     public Luke(PlayScreen screen){
         super(screen.getAtlas().findRegion("lukeStand"));
 
+        this.screen = screen;
         this.world = screen.getWorld();
 
         currentState = State.STANDING;
@@ -51,12 +55,14 @@ public class Luke extends Sprite {
 
         this.lukeStand = new TextureRegion(getTexture(),154+48,36,48,32);
 
-        //define mario in Box2d
+        //define luke  in Box2d
         defineLuke();
 
         //set initial values for luke location, width and height. And initial frame as lukeStand.
         setBounds(0,0, 48/ StarWars.PPM,32 / StarWars.PPM);
         setRegion(this.lukeStand);
+
+        bullets = new Array<Bullet>();
 
     }
 
@@ -68,6 +74,12 @@ public class Luke extends Sprite {
 
         //update sprite with the correct frame
         setRegion(getFrame(delta));
+
+        for(Bullet bullet : bullets) {
+            bullet.update(delta);
+            if(bullet.isDestroyed())
+                bullets.removeValue(bullet, true);
+        }
     }
 
     public TextureRegion getFrame(float delta){
@@ -208,5 +220,15 @@ public class Luke extends Sprite {
 
         setBounds(0, 0, 48 / StarWars.PPM, 32 / StarWars.PPM);
         setRegion(this.lukeStand);
+    }
+
+    public void fire(){
+        bullets.add(new Bullet(screen, b2body.getPosition().x, b2body.getPosition().y, runningRight ? true : false));
+    }
+
+    public void draw(Batch batch){
+        super.draw(batch);
+        for(Bullet bullet : bullets)
+            bullet.draw(batch);
     }
 }
