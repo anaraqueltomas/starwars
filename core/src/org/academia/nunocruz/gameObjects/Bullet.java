@@ -51,8 +51,7 @@ public class Bullet extends Sprite {
         CircleShape shape = new CircleShape();
         shape.setRadius(3 / StarWars.PPM);
         fdef.filter.categoryBits = StarWars.BULLET_BIT;
-        fdef.filter.maskBits = StarWars.GROUND_BIT | StarWars.ENERGYGLOBE_BIT |
-                StarWars.BRICK_BIT | StarWars.ENEMY_BIT | StarWars.OBJECT_BIT;
+        fdef.filter.maskBits = StarWars.GROUND_BIT | StarWars.ENERGYGLOBE_BIT | StarWars.ENEMY_BIT | StarWars.PLATFORM_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

@@ -68,8 +68,10 @@ public class Jawa extends Enemy {
         shape.setAsBox(8 / StarWars.PPM, 16 / StarWars.PPM);
 
         fdef.filter.categoryBits = StarWars.ENEMY_BIT;
-        fdef.filter.maskBits = StarWars.GROUND_BIT | StarWars.ENERGYGLOBE_BIT | StarWars.BRICK_BIT |
-                StarWars.ENEMY_BIT | StarWars.OBJECT_BIT | StarWars.LUKE_BIT | StarWars.BULLET_BIT;
+
+        fdef.filter.maskBits = StarWars.GROUND_BIT | StarWars.ENERGYGLOBE_BIT |
+                StarWars.ENEMY_BIT | StarWars.PLATFORM_BIT | StarWars.LUKE_BIT | StarWars.BULLET_BIT;
+
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

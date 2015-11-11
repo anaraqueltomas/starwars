@@ -18,50 +18,48 @@ public class B2dContactListener implements ContactListener {
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
-        int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
+        Object objLuke;
+        Object objOther;
 
-        switch (cDef) {
+        if (fixA.getUserData() instanceof Luke) {
+            objLuke = fixA.getUserData();
+            objOther = fixB.getUserData();
+        } else {
+            objLuke = fixB.getUserData();
+            objOther = fixA.getUserData();
+        }
+
+        switch (fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits) {
+
 
             case StarWars.LUKE_BIT | StarWars.ENEMY_BIT:
 
-                //Se a fixA for o Luke chama o metodo hit, se não chama o metodo na fixtureB;
-                if (fixA.getFilterData().categoryBits == StarWars.LUKE_BIT) {
-                    ((Luke) fixA.getUserData()).hit(((Enemy) fixB.getUserData()).damage);
-                } else {
-                    ((Luke) fixB.getUserData()).hit(((Enemy) fixA.getUserData()).damage);
-                }
+                // if Luke contacts an Enemy, it will beHitBy that Enemy and suffer the damage
+
+                ((Luke)objLuke).beHitBy(((Enemy)objOther).getDamage());
                 break;
 
 
             case StarWars.LUKE_BIT | StarWars.ENERGYGLOBE_BIT:
 
-                if (fixA.getFilterData().categoryBits == StarWars.LUKE_BIT) {
-                    ((Luke) fixA.getUserData()).gainHealth(((EnergyGlobe) fixB.getUserData()).health);
-                    ((Luke) fixA.getUserData()).gainScore(((EnergyGlobe) fixB.getUserData()).score);
-                    ((EnergyGlobe) fixB.getUserData()).onHit();
+                // if Luke contacts a EnergyGlobe, it will gainHealth and Score
+                // and the EnergyGlobe will disappear
 
-                } else {
-                    ((Luke) fixB.getUserData()).gainHealth(((EnergyGlobe) fixA.getUserData()).health);
-                    ((Luke) fixB.getUserData()).gainScore(((EnergyGlobe) fixA.getUserData()).score);
-                    ((EnergyGlobe) fixA.getUserData()).onHit();
-                }
+                ((Luke)objLuke).gainHealth( ((EnergyGlobe)objOther).getHealth());
+                ((Luke)objLuke).gainScore( ((EnergyGlobe)objOther).getScore());
+                ((EnergyGlobe)objOther).onHit();
                 break;
+
 
             case StarWars.LUKE_BIT | StarWars.SPACESHIP_BIT:
-                if (fixA.getFilterData().categoryBits == StarWars.LUKE_BIT) {
-                    ((SpaceShip) fixB.getUserData()).onHit();
 
-                } else {
-                    ((SpaceShip) fixA.getUserData()).onHit();
-                }
+                ((SpaceShip)objOther).onHit();
                 break;
-            case StarWars.LUKE_BIT | StarWars.YODA_BIT:
-                if (fixA.getFilterData().categoryBits == StarWars.LUKE_BIT) {
-                    ((Yoda) fixB.getUserData()).onHit();
 
-                } else {
-                    ((Yoda) fixA.getUserData()).onHit();
-                }
+
+            case StarWars.LUKE_BIT | StarWars.YODA_BIT:
+
+                ((Yoda)objOther).onHit();
                 break;
 
             case StarWars.BULLET_BIT | StarWars.ENEMY_BIT:
@@ -80,16 +78,13 @@ public class B2dContactListener implements ContactListener {
 
     @Override
     public void endContact(Contact contact) {
-
     }
 
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
-
     }
 
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
-
     }
 }

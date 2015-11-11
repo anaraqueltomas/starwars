@@ -18,9 +18,10 @@ public abstract class Enemy extends Sprite {
     boolean setToDestroy;
     boolean destroyed;
 
-    public int health;
-    public int damage;
-    public int score;
+    protected int health;
+    protected int damage;
+    protected int score;
+
 
     public Enemy(PlayScreen screen, float x, float y) {
 
@@ -46,6 +47,18 @@ public abstract class Enemy extends Sprite {
 
     public void setToDestroy(){
         setToDestroy = true;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public int getScore() {
+        return score;
     }
 }
 

@@ -164,14 +164,14 @@ public class Luke extends Sprite {
         shape.setAsBox(8/StarWars.PPM,16/StarWars.PPM);
 
         fixtureDef.filter.categoryBits = StarWars.LUKE_BIT;
-        fixtureDef.filter.maskBits = StarWars.GROUND_BIT | StarWars.ENERGYGLOBE_BIT | StarWars.BRICK_BIT|
-                StarWars.ENEMY_BIT| StarWars.OBJECT_BIT | StarWars.SPACESHIP_BIT | StarWars.YODA_BIT;
+        fixtureDef.filter.maskBits = StarWars.GROUND_BIT | StarWars.ENERGYGLOBE_BIT |
+                StarWars.ENEMY_BIT| StarWars.PLATFORM_BIT | StarWars.SPACESHIP_BIT | StarWars.YODA_BIT;
 
         fixtureDef.shape = shape;
         b2body.createFixture(fixtureDef).setUserData(this);
     }
 
-    public void hit(int n){
+    public void beHitBy(int n){
         health -= n;
         Hud.setHealthLabel();
         if (health <= 0) { lukeIsDead = true; }

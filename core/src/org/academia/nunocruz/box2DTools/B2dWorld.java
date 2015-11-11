@@ -30,69 +30,77 @@ public class B2dWorld {
         FixtureDef fdef = new FixtureDef();
         Body body;
 
-        //create ground bodies/fixtures
+        // GROUND // LAYER #3
         for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            Rectangle r = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / StarWars.PPM, (rect.getY() + rect.getHeight() / 2) / StarWars.PPM);
+            fdef.filter.categoryBits = StarWars.GROUND_BIT;
+
+            bdef.position.set((r.getX() + r.getWidth() / 2) / StarWars.PPM, (r.getY() + r.getHeight() / 2) / StarWars.PPM);
 
             body = world.createBody(bdef);
 
-            shape.setAsBox(rect.getWidth() / 2 / StarWars.PPM, rect.getHeight() / 2 / StarWars.PPM);
+            shape.setAsBox(r.getWidth() / 2 / StarWars.PPM, r.getHeight() / 2 / StarWars.PPM);
+
             fdef.shape = shape;
             body.createFixture(fdef);
         }
 
-        //create plataform bodies/fixtures
+        // PLATFORM // LAYER #4
         for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
+            Rectangle r = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rectangle.getX() + rectangle.getWidth() / 2) / StarWars.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / StarWars.PPM);
+            fdef.filter.categoryBits = StarWars.PLATFORM_BIT;
+
+            bdef.position.set((r.getX() + r.getWidth() / 2) / StarWars.PPM, (r.getY() + r.getHeight() / 2) / StarWars.PPM);
 
             body = world.createBody(bdef);
 
-            shape.setAsBox(rectangle.getWidth() / 2 / StarWars.PPM, rectangle.getHeight() / 2 / StarWars.PPM);
+            shape.setAsBox(r.getWidth() / 2 / StarWars.PPM, r.getHeight() / 2 / StarWars.PPM);
             fdef.shape = shape;
-            fdef.filter.categoryBits = StarWars.OBJECT_BIT;
             body.createFixture(fdef);
         }
 
-        //create energy bodies/fixtures
+        // ENERGY // LAYER #5
         for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-            new EnergyGlobe(screen, rectangle);
+            Rectangle r = ((RectangleMapObject) object).getRectangle();
+
+            fdef.filter.categoryBits = StarWars.ENERGYGLOBE_BIT;
+            new EnergyGlobe(screen, r);
         }
 
-        //create all jawas;
+        // JAWA // LAYER #6
         jawas = new Array<Jawa>();
+
         for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            jawas.add(new Jawa(screen, rect.getX() / StarWars.PPM, rect.getY() / StarWars.PPM));
+            Rectangle r = ((RectangleMapObject) object).getRectangle();
+            jawas.add(new Jawa(screen, r.getX() / StarWars.PPM, r.getY() / StarWars.PPM));
             fdef.filter.categoryBits = StarWars.ENEMY_BIT;
         }
 
-        //create all tuskens;
+        // TUSKEN // LAYER #7
         tuskens = new Array<Tusken>();
+
         for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            tuskens.add(new Tusken(screen, rect.getX() / StarWars.PPM, rect.getY() / StarWars.PPM));
+            Rectangle r = ((RectangleMapObject) object).getRectangle();
+            tuskens.add(new Tusken(screen, r.getX() / StarWars.PPM, r.getY() / StarWars.PPM));
             fdef.filter.categoryBits = StarWars.ENEMY_BIT;
         }
 
-        //create SpaceShips;
-        Array<SpaceShip> spaceShips = new Array<SpaceShip>();
+        // SPACESHIP // LAYER #8
         for (MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new SpaceShip(screen, rect);
+            Rectangle r = ((RectangleMapObject) object).getRectangle();
+            fdef.filter.categoryBits = StarWars.SPACESHIP_BIT;
+            new SpaceShip(screen, r);
         }
 
-        //create yodas;
-        Array<Yoda> yodas = new Array<Yoda>();
+        // YODA // LAYER #9
         for (MapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new Yoda(screen, rect);
+            Rectangle r = ((RectangleMapObject) object).getRectangle();
+            fdef.filter.categoryBits = StarWars.YODA_BIT;
+            new Yoda(screen, r);
         }
     }
 

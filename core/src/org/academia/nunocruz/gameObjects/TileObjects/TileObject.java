@@ -32,7 +32,7 @@ public abstract class TileObject {
 
         shape.setAsBox(bounds.getWidth() / 2 / StarWars.PPM, bounds.getHeight() / 2 / StarWars.PPM);
         fdef.shape = shape;
-        fdef.filter.categoryBits = StarWars.OBJECT_BIT;
+        fdef.filter.categoryBits = StarWars.PLATFORM_BIT;
         fixture = body.createFixture(fdef);
 
     }

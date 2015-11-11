@@ -17,6 +17,12 @@ public class SpaceShip extends TileObject {
 
     @Override
     public void onHit() {
+
+        /**
+         *  change the empty spaceship to the one with Luke
+         *  and make it fly away to the universe
+         */
+
         Luke.gainScore(50);
         Sound victorySound = StarWars.manager.get("audio/sounds/victorySound.mp3");
         victorySound.play();
