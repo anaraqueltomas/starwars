@@ -7,4 +7,3 @@ Please, take into account that we had only 8 weeks of Java learning by this time
 
 ![alt tag](https://github.com/anaraqueltomas/starwars/blob/master/android/assets/introScreen.png)
 ![alt tag](https://github.com/anaraqueltomas/starwars/blob/master/android/assets/screen_2.png)
-![alt tag](https://github.com/anaraqueltomas/starwars/blob/master/android/assets/winnerScreen.png)
